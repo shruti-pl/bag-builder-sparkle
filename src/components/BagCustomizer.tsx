@@ -67,6 +67,9 @@ export const BagCustomizer = () => {
       </DialogTrigger>
       
       <DialogContent className="max-w-7xl h-[90vh] p-0 bg-white border-0 rounded-none overflow-hidden">
+        <DialogHeader className="sr-only">
+          <DialogTitle>Bag Customizer</DialogTitle>
+        </DialogHeader>
         <div className="flex h-full relative">
           {/* Left Panel - Customization Options */}
           <div className="w-96 bg-white flex flex-col h-full border-r border-gray-200">
@@ -79,7 +82,7 @@ export const BagCustomizer = () => {
 
             {/* Content - Scrollable */}
             <div className="flex-1 min-h-0">
-              <ScrollArea className="h-full">
+              <ScrollArea className="h-full w-full">
                 <div className="p-6 space-y-8 pb-20">
                 {/* Bag Fabric Section */}
                 <div>
