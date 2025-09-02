@@ -67,6 +67,13 @@ export const BagCustomizer = () => {
     setHoverTimeout(timeout);
   };
 
+  const handleAreaLeave = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+    }
+    setHoveredArea(null);
+  };
+
   const handleAreaClick = (area: "bag" | "strap") => {
     setCurrentStep(area === "bag" ? "fabric" : "strap");
   };
@@ -101,7 +108,10 @@ export const BagCustomizer = () => {
             </DialogHeader>
 
             {/* Bag Preview */}
-            <div className="relative w-96 h-96 mx-auto mt-16">
+            <div 
+              className="relative w-96 h-96 mx-auto mt-16"
+              onMouseLeave={handleAreaLeave}
+            >
               {/* Main Bag Body */}
               <div
                 className={`
