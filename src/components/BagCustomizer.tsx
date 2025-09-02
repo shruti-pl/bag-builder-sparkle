@@ -120,7 +120,7 @@ export const BagCustomizer = () => {
                           />
                         </Card>
                         {hoveredFabric === fabric.id && (
-                          <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap z-10">
+                          <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap z-10">
                             {fabric.name}
                           </div>
                         )}
