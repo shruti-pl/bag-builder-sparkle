@@ -49,6 +49,13 @@ export const BagCustomizer = () => {
   const basePrice = 8100;
   const totalPrice = basePrice + selectedStrap.price + selectedStrapColor.price;
 
+  // Debug logging
+  useEffect(() => {
+    console.log("BagCustomizer rendered, isOpen:", isOpen);
+    console.log("Selected fabric:", selectedFabric);
+    console.log("Selected strap:", selectedStrap);
+  }, [isOpen, selectedFabric, selectedStrap]);
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -59,11 +66,11 @@ export const BagCustomizer = () => {
       </DialogTrigger>
       
       <DialogContent className="max-w-7xl h-[90vh] p-0 bg-white border-0 rounded-none overflow-hidden">
-        <div className="flex h-full relative">
+        <div className="flex h-full relative bg-yellow-200">
           {/* Left Panel - Customization Options */}
-          <div className="w-96 bg-white flex flex-col h-full">
+          <div className="w-96 bg-blue-200 flex flex-col h-full border-4 border-blue-600">
             {/* Header */}
-            <div className="p-6 flex-shrink-0 border-b border-gray-100">
+            <div className="p-6 flex-shrink-0 border-b border-gray-100 bg-green-200">
               <h2 className="text-3xl font-bold text-black">
                 Let's build your Sling
               </h2>
@@ -261,7 +268,6 @@ export const BagCustomizer = () => {
               >
                 Add to cart
               </Button>
-            </div>
             </div>
           </div>
         </div>
