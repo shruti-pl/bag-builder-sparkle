@@ -71,7 +71,7 @@ export const BagCustomizer = () => {
         </DialogHeader>
         <div className="flex h-full relative">
           {/* Left Panel - Customization Options */}
-          <div className="w-96 bg-white flex flex-col h-full border-r border-gray-200">
+          <div className="w-96 bg-white flex flex-col border-r border-gray-200" style={{ height: '90vh' }}>
             {/* Header */}
             <div className="p-6 flex-shrink-0 border-b border-gray-100">
               <h2 className="text-3xl font-bold text-black">
@@ -80,8 +80,13 @@ export const BagCustomizer = () => {
             </div>
 
             {/* Content - Scrollable */}
-            <div className="flex-1 overflow-y-auto overflow-x-hidden">
-              <div className="p-6 space-y-8 pb-20">
+            <div 
+              className="flex-1 overflow-y-scroll p-6 space-y-8" 
+              style={{ 
+                maxHeight: 'calc(90vh - 120px)',
+                paddingBottom: '40px'
+              }}
+            >
                 {/* Bag Fabric Section */}
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -192,13 +197,12 @@ export const BagCustomizer = () => {
                             +₹{color.price.toLocaleString()}.00
                           </div>
                         )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                       </div>
+                     ))}
+                   </div>
+                 </div>
+               </div>
+             </div>
 
           {/* Right Panel - Price and Bag Preview */}
           <div className="flex-1 bg-gray-50 flex flex-col relative">
