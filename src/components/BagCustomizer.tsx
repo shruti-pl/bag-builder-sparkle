@@ -188,7 +188,6 @@ export const BagCustomizer = () => {
               </div>
             </div>
           </div>
-          </div>
 
           {/* Right Panel - Price and Bag Preview */}
           <div className="flex-1 bg-gray-50 flex flex-col relative">
@@ -244,6 +243,7 @@ export const BagCustomizer = () => {
               >
                 Add to cart
               </Button>
+            </div>
             </div>
           </div>
         </div>
