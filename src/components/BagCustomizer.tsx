@@ -220,7 +220,7 @@ export const BagCustomizer = () => {
             </div>
 
             {/* Bag Preview */}
-            <div className="flex-1 flex items-center justify-center p-16 bg-gray-100">
+            <div className="flex-1 flex items-center justify-center px-16 pt-16 pb-4 bg-gray-100">
               <div className="relative w-80 h-80 overflow-hidden">
                 {/* Strap - positioned within the container */}
                 <div
@@ -256,7 +256,7 @@ export const BagCustomizer = () => {
             </div>
 
             {/* Add to Cart Button */}
-            <div className="px-8 pb-8 pt-2 flex justify-center">
+            <div className="px-8 pb-8 flex justify-center">
               <Button 
                 className="bg-orange-500 hover:bg-orange-600 text-white px-12 py-6 text-lg rounded-xl font-semibold"
                 onClick={() => {
