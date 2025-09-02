@@ -45,6 +45,8 @@ export const BagCustomizer = () => {
   const [selectedStrap, setSelectedStrap] = useState(strapOptions[0]);
   const [selectedStrapColor, setSelectedStrapColor] = useState(strapColors[0]);
   const [hoveredFabric, setHoveredFabric] = useState<string | null>(null);
+  const [hoveredStrap, setHoveredStrap] = useState<string | null>(null);
+  const [hoveredStrapColor, setHoveredStrapColor] = useState<string | null>(null);
 
   const basePrice = 8100;
   const totalPrice = basePrice + selectedStrap.price + selectedStrapColor.price;
@@ -137,8 +139,13 @@ export const BagCustomizer = () => {
                   </div>
                   
                   <div className="flex gap-4">
-                    {strapOptions.map((strap) => (
-                      <div key={strap.id} className="relative">
+                     {strapOptions.map((strap) => (
+                       <div 
+                         key={strap.id} 
+                         className="relative"
+                         onMouseEnter={() => setHoveredStrap(strap.id)}
+                         onMouseLeave={() => setHoveredStrap(null)}
+                       >
                         <Card
                           className={`
                             w-20 h-20 cursor-pointer transition-all duration-200 p-3 hover:shadow-lg border-2 rounded-full
@@ -162,11 +169,16 @@ export const BagCustomizer = () => {
                             </div>
                           )}
                         </Card>
-                        {strap.price > 0 && (
-                          <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
-                            +₹{strap.price.toLocaleString()}.00
-                          </div>
-                        )}
+                         {hoveredStrap === strap.id && (
+                           <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap z-10">
+                             {strap.name}
+                           </div>
+                         )}
+                         {strap.price > 0 && (
+                           <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
+                             +₹{strap.price.toLocaleString()}.00
+                           </div>
+                         )}
                       </div>
                     ))}
                   </div>
@@ -180,8 +192,13 @@ export const BagCustomizer = () => {
                   </div>
                   
                   <div className="flex gap-4">
-                    {strapColors.map((color) => (
-                      <div key={color.id} className="relative">
+                     {strapColors.map((color) => (
+                       <div 
+                         key={color.id} 
+                         className="relative"
+                         onMouseEnter={() => setHoveredStrapColor(color.id)}
+                         onMouseLeave={() => setHoveredStrapColor(null)}
+                       >
                         <Card
                           className={`
                             w-16 h-16 cursor-pointer transition-all duration-200 p-2 hover:shadow-lg border-2 rounded-full
@@ -194,11 +211,16 @@ export const BagCustomizer = () => {
                             style={{ backgroundColor: color.color }}
                           />
                         </Card>
-                        {color.price > 0 && (
-                          <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
-                            +₹{color.price.toLocaleString()}.00
-                          </div>
-                        )}
+                         {hoveredStrapColor === color.id && (
+                           <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap z-10">
+                             {color.name}
+                           </div>
+                         )}
+                         {color.price > 0 && (
+                           <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
+                             +₹{color.price.toLocaleString()}.00
+                           </div>
+                         )}
                        </div>
                      ))}
                    </div>
