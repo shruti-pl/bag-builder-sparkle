@@ -80,14 +80,18 @@ export const BagCustomizer = () => {
                 
                 <div className="grid grid-cols-3 gap-3">
                   {fabricOptions.map((fabric) => (
-                    <div key={fabric.id} className="relative">
+                    <div 
+                      key={fabric.id} 
+                      className="relative"
+                      onMouseEnter={() => setHoveredFabric(fabric.id)}
+                      onMouseLeave={() => setHoveredFabric(null)}
+                    >
                       <Card
                         className={`
                           aspect-square cursor-pointer transition-all duration-200 p-2 hover:shadow-lg border-2
                           ${selectedFabric.id === fabric.id ? "border-black" : "border-gray-200"}
                         `}
                         onClick={() => setSelectedFabric(fabric)}
-              
                       >
                         <div
                           className="w-full h-full rounded-lg"
@@ -124,13 +128,21 @@ export const BagCustomizer = () => {
                         `}
                         onClick={() => setSelectedStrap(strap)}
                       >
-                        <div
-                          className={`
-                            w-full rounded-full
-                            ${strap.style === "padded" ? "h-6 border-2 border-white" : "h-4"}
-                          `}
-                          style={{ backgroundColor: strap.color }}
-                        />
+                        {strap.style === "padded" ? (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <div 
+                              className="w-8 h-6 rounded-full border-2 border-white/50"
+                              style={{ backgroundColor: strap.color }}
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <div 
+                              className="w-8 h-4 rounded-full"
+                              style={{ backgroundColor: strap.color }}
+                            />
+                          </div>
+                        )}
                       </Card>
                       {strap.price > 0 && (
                         <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
