@@ -63,16 +63,17 @@ export const BagCustomizer = () => {
           {/* Left Panel - Customization Options */}
           <div className="w-96 bg-white flex flex-col overflow-hidden">
             {/* Header */}
-            <div className="p-6">
+            <div className="p-6 flex-shrink-0">
               <h2 className="text-3xl font-bold text-black">
                 Let's build your Sling
               </h2>
             </div>
 
             {/* Content - Scrollable with invisible scrollbar */}
-            <div className="flex-1 p-6 overflow-y-auto scrollbar-hide space-y-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-              {/* Bag Fabric Section */}
-              <div>
+            <div className="flex-1 overflow-y-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              <div className="p-6 space-y-12">
+                {/* Bag Fabric Section */}
+                <div>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-xl font-bold text-black">Bag Fabric</h3>
                   <div className="text-sm text-gray-500">{selectedFabric.name}</div>
@@ -186,6 +187,7 @@ export const BagCustomizer = () => {
                 </div>
               </div>
             </div>
+          </div>
           </div>
 
           {/* Right Panel - Price and Bag Preview */}
