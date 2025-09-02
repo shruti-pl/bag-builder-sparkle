@@ -61,17 +61,17 @@ export const BagCustomizer = () => {
       <DialogContent className="max-w-7xl h-[90vh] p-0 bg-white border-0 rounded-none overflow-hidden">
         <div className="flex h-full relative">
           {/* Left Panel - Customization Options */}
-          <div className="w-96 bg-white flex flex-col overflow-hidden">
+          <div className="w-96 bg-white flex flex-col h-full">
             {/* Header */}
-            <div className="p-6 flex-shrink-0">
+            <div className="p-6 flex-shrink-0 border-b border-gray-100">
               <h2 className="text-3xl font-bold text-black">
                 Let's build your Sling
               </h2>
             </div>
 
             {/* Content - Scrollable with invisible scrollbar */}
-            <div className="flex-1 overflow-y-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-              <div className="p-6 space-y-12">
+            <div className="flex-1 overflow-y-auto scrollbar-hide min-h-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              <div className="p-6 space-y-8 pb-20">
                 {/* Bag Fabric Section */}
                 <div>
                 <div className="flex items-center justify-between mb-4">
