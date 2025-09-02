@@ -89,86 +89,8 @@ export const BagCustomizer = () => {
       
       <DialogContent className="max-w-6xl h-[90vh] p-0 bg-gradient-surface border-0 rounded-2xl overflow-hidden">
         <div className="flex h-full">
-          {/* Left Panel - Bag Preview */}
-          <div className="flex-1 bg-gradient-surface p-8 flex flex-col items-center justify-center relative">
-            <DialogHeader className="absolute top-6 left-6 right-6 z-10">
-              <div className="flex items-center justify-between">
-                <DialogTitle className="text-2xl font-bold text-foreground">
-                  Let's build your Sling
-                </DialogTitle>
-                <div className="text-right">
-                  <div className="text-3xl font-bold text-foreground">₹{totalPrice.toLocaleString()}</div>
-                  {selectedStrap.price > 0 && (
-                    <div className="text-sm text-muted-foreground">
-                      +₹{selectedStrap.price.toLocaleString()} for strap
-                    </div>
-                  )}
-                </div>
-              </div>
-            </DialogHeader>
-
-            {/* Bag Preview */}
-            <div 
-              className="relative w-96 h-96 mx-auto mt-16"
-              onMouseLeave={handleAreaLeave}
-            >
-              {/* Main Bag Body */}
-              <div
-                className={`
-                  absolute inset-0 rounded-3xl shadow-strong transition-all duration-500 cursor-pointer
-                  ${hoveredArea === "strap" ? "opacity-30" : "opacity-100"}
-                `}
-                style={{ 
-                  backgroundColor: selectedFabric.color,
-                  backgroundImage: getPatternBackground(selectedFabric.pattern, selectedFabric.color)
-                }}
-                onMouseEnter={() => handleAreaHover("bag")}
-                onClick={() => handleAreaClick("bag")}
-              >
-                {/* Bag details */}
-                <div className="absolute inset-4 border border-white/20 rounded-2xl"></div>
-                <div className="absolute top-8 left-8 w-8 h-8 bg-primary rounded-full opacity-80"></div>
-              </div>
-
-              {/* Strap */}
-              <div
-                className={`
-                  absolute -top-8 left-1/2 transform -translate-x-1/2 w-80 h-16 rounded-full shadow-medium transition-all duration-500 cursor-pointer
-                  ${hoveredArea === "bag" ? "opacity-30" : "opacity-100"}
-                  ${selectedStrap.style === "padded" ? "h-20" : "h-12"}
-                `}
-                style={{ backgroundColor: selectedStrap.color }}
-                onMouseEnter={() => handleAreaHover("strap")}
-                onClick={() => handleAreaClick("strap")}
-              >
-                {selectedStrap.style === "padded" && (
-                  <div className="absolute inset-2 border border-white/30 rounded-full"></div>
-                )}
-              </div>
-
-              {/* Interactive indicators */}
-              {hoveredArea && (
-                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2">
-                  <Badge variant="secondary" className="animate-pulse">
-                    Click to customize {hoveredArea}
-                  </Badge>
-                </div>
-              )}
-            </div>
-
-            <Button 
-              className="mt-8 bg-primary hover:bg-primary/90 text-primary-foreground px-12 py-6 text-lg rounded-xl shadow-medium"
-              onClick={() => {
-                setIsOpen(false);
-                // Add to cart logic would go here
-              }}
-            >
-              Add to cart
-            </Button>
-          </div>
-
-          {/* Right Panel - Customization Options */}
-          <div className="w-96 bg-card border-l border-border flex flex-col">
+          {/* Left Panel - Customization Options */}
+          <div className="w-96 bg-card border-r border-border flex flex-col">
             {/* Reference Image */}
             <div className="p-4 border-b border-border">
               <img 
@@ -284,6 +206,84 @@ export const BagCustomizer = () => {
                 </div>
               )}
             </div>
+          </div>
+
+          {/* Right Panel - Bag Preview */}
+          <div className="flex-1 bg-gradient-surface p-8 flex flex-col items-center justify-center relative">
+            <DialogHeader className="absolute top-6 left-6 right-6 z-10">
+              <div className="flex items-center justify-between">
+                <DialogTitle className="text-2xl font-bold text-foreground">
+                  Let's build your Sling
+                </DialogTitle>
+                <div className="text-right">
+                  <div className="text-3xl font-bold text-foreground">₹{totalPrice.toLocaleString()}</div>
+                  {selectedStrap.price > 0 && (
+                    <div className="text-sm text-muted-foreground">
+                      +₹{selectedStrap.price.toLocaleString()} for strap
+                    </div>
+                  )}
+                </div>
+              </div>
+            </DialogHeader>
+
+            {/* Bag Preview */}
+            <div 
+              className="relative w-96 h-96 mx-auto mt-16"
+              onMouseLeave={handleAreaLeave}
+            >
+              {/* Main Bag Body */}
+              <div
+                className={`
+                  absolute inset-0 rounded-3xl shadow-strong transition-all duration-500 cursor-pointer
+                  ${hoveredArea === "strap" ? "opacity-30" : "opacity-100"}
+                `}
+                style={{ 
+                  backgroundColor: selectedFabric.color,
+                  backgroundImage: getPatternBackground(selectedFabric.pattern, selectedFabric.color)
+                }}
+                onMouseEnter={() => handleAreaHover("bag")}
+                onClick={() => handleAreaClick("bag")}
+              >
+                {/* Bag details */}
+                <div className="absolute inset-4 border border-white/20 rounded-2xl"></div>
+                <div className="absolute top-8 left-8 w-8 h-8 bg-primary rounded-full opacity-80"></div>
+              </div>
+
+              {/* Strap */}
+              <div
+                className={`
+                  absolute -top-8 left-1/2 transform -translate-x-1/2 w-80 h-16 rounded-full shadow-medium transition-all duration-500 cursor-pointer
+                  ${hoveredArea === "bag" ? "opacity-30" : "opacity-100"}
+                  ${selectedStrap.style === "padded" ? "h-20" : "h-12"}
+                `}
+                style={{ backgroundColor: selectedStrap.color }}
+                onMouseEnter={() => handleAreaHover("strap")}
+                onClick={() => handleAreaClick("strap")}
+              >
+                {selectedStrap.style === "padded" && (
+                  <div className="absolute inset-2 border border-white/30 rounded-full"></div>
+                )}
+              </div>
+
+              {/* Interactive indicators */}
+              {hoveredArea && (
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2">
+                  <Badge variant="secondary" className="animate-pulse">
+                    Click to customize {hoveredArea}
+                  </Badge>
+                </div>
+              )}
+            </div>
+
+            <Button 
+              className="mt-8 bg-primary hover:bg-primary/90 text-primary-foreground px-12 py-6 text-lg rounded-xl shadow-medium"
+              onClick={() => {
+                setIsOpen(false);
+                // Add to cart logic would go here
+              }}
+            >
+              Add to cart
+            </Button>
           </div>
         </div>
       </DialogContent>
