@@ -44,7 +44,7 @@ export const BagCustomizer = () => {
   const [selectedFabric, setSelectedFabric] = useState(fabricOptions[1]); // Start with Gridstop Chili
   const [selectedStrap, setSelectedStrap] = useState(strapOptions[0]);
   const [selectedStrapColor, setSelectedStrapColor] = useState(strapColors[0]);
-  
+  const [hoveredFabric, setHoveredFabric] = useState<string | null>(null);
 
   const basePrice = 8100;
   const totalPrice = basePrice + selectedStrap.price + selectedStrapColor.price;
@@ -98,22 +98,33 @@ export const BagCustomizer = () => {
                   
                   <div className="grid grid-cols-3 gap-3">
                     {fabricOptions.map((fabric) => (
-                      <Card
-                        key={fabric.id}
-                        className={`
-                          aspect-square cursor-pointer transition-all duration-200 p-2 hover:shadow-lg border-2
-                          ${selectedFabric.id === fabric.id ? "border-black" : "border-gray-200"}
-                        `}
-                        onClick={() => setSelectedFabric(fabric)}
+                      <div 
+                        key={fabric.id} 
+                        className="relative"
+                        onMouseEnter={() => setHoveredFabric(fabric.id)}
+                        onMouseLeave={() => setHoveredFabric(null)}
                       >
-                        <div
-                          className="w-full h-full rounded-lg"
-                          style={{
-                            backgroundColor: fabric.color,
-                            backgroundImage: getPatternBackground(fabric.pattern, fabric.color)
-                          }}
-                        />
-                      </Card>
+                        <Card
+                          className={`
+                            aspect-square cursor-pointer transition-all duration-200 p-2 hover:shadow-lg border-2
+                            ${selectedFabric.id === fabric.id ? "border-black" : "border-gray-200"}
+                          `}
+                          onClick={() => setSelectedFabric(fabric)}
+                        >
+                          <div
+                            className="w-full h-full rounded-lg"
+                            style={{
+                              backgroundColor: fabric.color,
+                              backgroundImage: getPatternBackground(fabric.pattern, fabric.color)
+                            }}
+                          />
+                        </Card>
+                        {hoveredFabric === fabric.id && (
+                          <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap z-10">
+                            {fabric.name}
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </div>
                 </div>
