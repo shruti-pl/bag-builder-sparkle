@@ -78,8 +78,9 @@ export const BagCustomizer = () => {
             </div>
 
             {/* Content - Scrollable */}
-            <ScrollArea className="flex-1">
-              <div className="p-6 space-y-8 pb-16">
+            <div className="flex-1 min-h-0">
+              <ScrollArea className="h-full">
+                <div className="p-6 space-y-8 pb-20">
                 {/* Bag Fabric Section */}
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -194,8 +195,9 @@ export const BagCustomizer = () => {
                     ))}
                   </div>
                 </div>
-              </div>
-            </ScrollArea>
+                </div>
+              </ScrollArea>
+            </div>
           </div>
 
           {/* Right Panel - Price and Bag Preview */}
