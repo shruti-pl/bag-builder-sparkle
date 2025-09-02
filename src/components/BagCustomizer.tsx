@@ -70,127 +70,124 @@ export const BagCustomizer = () => {
             </div>
 
             {/* Content - Scrollable with invisible scrollbar */}
-            <div className="flex-1 overflow-y-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-              <div className="p-6 space-y-12 min-h-full">
+            <div className="flex-1 overflow-y-auto scrollbar-hide min-h-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              <div className="p-6 space-y-8 pb-20">
                 {/* Bag Fabric Section */}
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold text-black">Bag Fabric</h3>
-                    <div className="text-sm text-gray-500">{selectedFabric.name}</div>
-                  </div>
-                  
-                  <div className="grid grid-cols-3 gap-3">
-                    {fabricOptions.map((fabric) => (
-                      <div 
-                        key={fabric.id} 
-                        className="relative"
-                        onMouseEnter={() => setHoveredFabric(fabric.id)}
-                        onMouseLeave={() => setHoveredFabric(null)}
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-bold text-black">Bag Fabric</h3>
+                  <div className="text-sm text-gray-500">{selectedFabric.name}</div>
+                </div>
+                
+                <div className="grid grid-cols-3 gap-3">
+                  {fabricOptions.map((fabric) => (
+                    <div 
+                      key={fabric.id} 
+                      className="relative"
+                      onMouseEnter={() => setHoveredFabric(fabric.id)}
+                      onMouseLeave={() => setHoveredFabric(null)}
+                    >
+                      <Card
+                        className={`
+                          aspect-square cursor-pointer transition-all duration-200 p-2 hover:shadow-lg border-2
+                          ${selectedFabric.id === fabric.id ? "border-black" : "border-gray-200"}
+                        `}
+                        onClick={() => setSelectedFabric(fabric)}
                       >
-                        <Card
-                          className={`
-                            aspect-square cursor-pointer transition-all duration-200 p-2 hover:shadow-lg border-2
-                            ${selectedFabric.id === fabric.id ? "border-black" : "border-gray-200"}
-                          `}
-                          onClick={() => setSelectedFabric(fabric)}
-                        >
-                          <div
-                            className="w-full h-full rounded-lg"
-                            style={{
-                              backgroundColor: fabric.color,
-                              backgroundImage: getPatternBackground(fabric.pattern, fabric.color)
-                            }}
-                          />
-                        </Card>
-                        {hoveredFabric === fabric.id && (
-                          <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap z-10">
-                            {fabric.name}
+                        <div
+                          className="w-full h-full rounded-lg"
+                          style={{
+                            backgroundColor: fabric.color,
+                            backgroundImage: getPatternBackground(fabric.pattern, fabric.color)
+                          }}
+                        />
+                      </Card>
+                      {hoveredFabric === fabric.id && (
+                        <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap z-10">
+                          {fabric.name}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Strap Style Section */}
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-bold text-black">Strap Style</h3>
+                  <div className="text-sm text-gray-500">{selectedStrap.name}</div>
+                </div>
+                
+                <div className="flex gap-4">
+                  {strapOptions.map((strap) => (
+                    <div key={strap.id} className="relative">
+                      <Card
+                        className={`
+                          w-20 h-20 cursor-pointer transition-all duration-200 p-3 hover:shadow-lg border-2 rounded-full
+                          ${selectedStrap.id === strap.id ? "border-black" : "border-gray-200"}
+                        `}
+                        onClick={() => setSelectedStrap(strap)}
+                      >
+                        {strap.style === "padded" ? (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <div 
+                              className="w-8 h-6 rounded-full border-2 border-white/50"
+                              style={{ backgroundColor: strap.color }}
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <div 
+                              className="w-8 h-4 rounded-full"
+                              style={{ backgroundColor: strap.color }}
+                            />
                           </div>
                         )}
-                      </div>
-                    ))}
-                  </div>
+                      </Card>
+                      {strap.price > 0 && (
+                        <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
+                          +₹{strap.price.toLocaleString()}.00
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
+              </div>
 
-                {/* Strap Style Section */}
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold text-black">Strap Style</h3>
-                    <div className="text-sm text-gray-500">{selectedStrap.name}</div>
-                  </div>
-                  
-                  <div className="flex gap-4">
-                    {strapOptions.map((strap) => (
-                      <div key={strap.id} className="relative">
-                        <Card
-                          className={`
-                            w-20 h-20 cursor-pointer transition-all duration-200 p-3 hover:shadow-lg border-2 rounded-full
-                            ${selectedStrap.id === strap.id ? "border-black" : "border-gray-200"}
-                          `}
-                          onClick={() => setSelectedStrap(strap)}
-                        >
-                          {strap.style === "padded" ? (
-                            <div className="w-full h-full flex items-center justify-center">
-                              <div 
-                                className="w-8 h-6 rounded-full border-2 border-white/50"
-                                style={{ backgroundColor: strap.color }}
-                              />
-                            </div>
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center">
-                              <div 
-                                className="w-8 h-4 rounded-full"
-                                style={{ backgroundColor: strap.color }}
-                              />
-                            </div>
-                          )}
-                        </Card>
-                        {strap.price > 0 && (
-                          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
-                            +₹{strap.price.toLocaleString()}.00
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+              {/* Strap Colour Section */}
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-bold text-black">Strap Colour</h3>
+                  <div className="text-sm text-gray-500">Lite Strap - {selectedStrapColor.name}</div>
                 </div>
-
-                {/* Strap Colour Section */}
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold text-black">Strap Colour</h3>
-                    <div className="text-sm text-gray-500">Lite Strap - {selectedStrapColor.name}</div>
-                  </div>
-                  
-                  <div className="flex gap-4">
-                    {strapColors.map((color) => (
-                      <div key={color.id} className="relative">
-                        <Card
-                          className={`
-                            w-16 h-16 cursor-pointer transition-all duration-200 p-2 hover:shadow-lg border-2 rounded-full
-                            ${selectedStrapColor.id === color.id ? "border-black" : "border-gray-200"}
-                          `}
-                          onClick={() => setSelectedStrapColor(color)}
-                        >
-                          <div
-                            className="w-full h-full rounded-full"
-                            style={{ backgroundColor: color.color }}
-                          />
-                        </Card>
-                        {color.price > 0 && (
-                          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
-                            +₹{color.price.toLocaleString()}.00
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                
+                <div className="flex gap-4">
+                  {strapColors.map((color) => (
+                    <div key={color.id} className="relative">
+                      <Card
+                        className={`
+                          w-16 h-16 cursor-pointer transition-all duration-200 p-2 hover:shadow-lg border-2 rounded-full
+                          ${selectedStrapColor.id === color.id ? "border-black" : "border-gray-200"}
+                        `}
+                        onClick={() => setSelectedStrapColor(color)}
+                      >
+                        <div
+                          className="w-full h-full rounded-full"
+                          style={{ backgroundColor: color.color }}
+                        />
+                      </Card>
+                      {color.price > 0 && (
+                        <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
+                          +₹{color.price.toLocaleString()}.00
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
-
-                {/* Extra spacing to ensure scrolling works */}
-                <div className="h-32"></div>
               </div>
             </div>
+          </div>
           </div>
 
           {/* Right Panel - Price and Bag Preview */}
