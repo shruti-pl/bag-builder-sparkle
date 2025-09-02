@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { X, Palette, Settings, Download, ZoomOut } from "lucide-react";
 
 type FabricType = {
@@ -77,8 +78,8 @@ export const BagCustomizer = () => {
             </div>
 
             {/* Content - Scrollable */}
-            <div className="flex-1 overflow-y-auto min-h-0">
-              <div className="p-6 space-y-12">
+            <ScrollArea className="flex-1 h-0">
+              <div className="p-6 space-y-12 min-h-[800px]">
                 {/* Bag Fabric Section */}
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -194,7 +195,7 @@ export const BagCustomizer = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </ScrollArea>
           </div>
 
           {/* Right Panel - Price and Bag Preview */}
