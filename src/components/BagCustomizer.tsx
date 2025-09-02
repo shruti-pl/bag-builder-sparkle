@@ -81,10 +81,12 @@ export const BagCustomizer = () => {
 
             {/* Content - Scrollable */}
             <div 
-              className="flex-1 overflow-y-scroll p-6 space-y-8" 
+              className="flex-1 overflow-y-scroll p-6 space-y-8 scrollbar-hide" 
               style={{ 
                 maxHeight: 'calc(90vh - 120px)',
-                paddingBottom: '40px'
+                paddingBottom: '40px',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none'
               }}
             >
                 {/* Bag Fabric Section */}
