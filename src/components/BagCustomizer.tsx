@@ -158,107 +158,122 @@ export const BagCustomizer = () => {
           </div>
 
           {/* Right Panel - Customization Options */}
-          <div className="w-96 bg-card border-l border-border p-6 overflow-y-auto">
-            <div className="flex items-center gap-4 mb-6">
+          <div className="w-96 bg-card border-l border-border flex flex-col">
+            {/* Reference Image */}
+            <div className="p-4 border-b border-border">
+              <img 
+                src="/lovable-uploads/d5c367b1-bbc9-40b0-9cdf-bf2bca499f35.png" 
+                alt="Sling bag reference" 
+                className="w-full h-32 object-contain rounded-lg bg-muted"
+              />
+            </div>
+
+            {/* Tab Navigation */}
+            <div className="flex border-b border-border">
               <Button
-                variant={currentStep === "fabric" ? "default" : "outline"}
+                variant={currentStep === "fabric" ? "default" : "ghost"}
                 onClick={() => setCurrentStep("fabric")}
-                className="flex-1"
+                className="flex-1 rounded-none border-b-2 border-transparent data-[state=active]:border-primary"
+                data-state={currentStep === "fabric" ? "active" : "inactive"}
               >
                 <Palette className="mr-2 h-4 w-4" />
                 Bag Fabric
               </Button>
               <Button
-                variant={currentStep === "strap" ? "default" : "outline"}
+                variant={currentStep === "strap" ? "default" : "ghost"}
                 onClick={() => setCurrentStep("strap")}
-                className="flex-1"
+                className="flex-1 rounded-none border-b-2 border-transparent data-[state=active]:border-primary"
+                data-state={currentStep === "strap" ? "active" : "inactive"}
               >
                 <Settings className="mr-2 h-4 w-4" />
                 Strap Style
               </Button>
             </div>
 
-            {currentStep === "fabric" && (
-              <div>
-                <h3 className="text-lg font-semibold mb-4 text-foreground">
-                  Bag Fabric
-                </h3>
-                <div className="text-sm text-muted-foreground mb-4">
-                  {selectedFabric.name}
-                </div>
-                
-                <div className="grid grid-cols-3 gap-3">
-                  {fabricOptions.map((fabric) => (
-                    <Card
-                      key={fabric.id}
-                      className={`
-                        aspect-square cursor-pointer transition-all duration-200 p-2 hover:shadow-medium
-                        ${selectedFabric.id === fabric.id ? "ring-2 ring-primary" : ""}
-                      `}
-                      onClick={() => setSelectedFabric(fabric)}
-                    >
-                      <div
-                        className="w-full h-full rounded-lg"
-                        style={{
-                          backgroundColor: fabric.color,
-                          backgroundImage: getPatternBackground(fabric.pattern, fabric.color)
-                        }}
-                      />
-                    </Card>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {currentStep === "strap" && (
-              <div>
-                <h3 className="text-lg font-semibold mb-4 text-foreground">
-                  Strap Style
-                </h3>
-                <div className="text-sm text-muted-foreground mb-4">
-                  {selectedStrap.name} - {selectedStrap.color}
-                </div>
-                
-                <div className="space-y-3">
-                  {strapOptions.map((strap) => (
-                    <Card
-                      key={strap.id}
-                      className={`
-                        cursor-pointer transition-all duration-200 p-4 hover:shadow-medium
-                        ${selectedStrap.id === strap.id ? "ring-2 ring-primary" : ""}
-                      `}
-                      onClick={() => setSelectedStrap(strap)}
-                    >
-                      <div className="flex items-center gap-3">
+            {/* Tab Content */}
+            <div className="flex-1 p-6 overflow-y-auto">
+              {currentStep === "fabric" && (
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-foreground">
+                    Bag Fabric
+                  </h3>
+                  <div className="text-sm text-muted-foreground mb-4">
+                    {selectedFabric.name}
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-3">
+                    {fabricOptions.map((fabric) => (
+                      <Card
+                        key={fabric.id}
+                        className={`
+                          aspect-square cursor-pointer transition-all duration-200 p-2 hover:shadow-medium
+                          ${selectedFabric.id === fabric.id ? "ring-2 ring-primary" : ""}
+                        `}
+                        onClick={() => setSelectedFabric(fabric)}
+                      >
                         <div
-                          className={`
-                            w-16 rounded-full
-                            ${strap.style === "padded" ? "h-6" : "h-4"}
-                          `}
-                          style={{ backgroundColor: strap.color }}
+                          className="w-full h-full rounded-lg"
+                          style={{
+                            backgroundColor: fabric.color,
+                            backgroundImage: getPatternBackground(fabric.pattern, fabric.color)
+                          }}
                         />
-                        <div className="flex-1">
-                          <div className="font-medium text-foreground">{strap.name}</div>
-                          {strap.price > 0 && (
-                            <div className="text-sm text-fabric-hover">
-                              +₹{strap.price.toLocaleString()}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
-
-                <div className="mt-6 p-4 bg-muted rounded-lg">
-                  <h4 className="font-medium text-foreground mb-2">Strap Colour</h4>
-                  <div className="flex gap-2">
-                    <div className="w-8 h-8 rounded-full bg-bag-strap border-2 border-white shadow-sm cursor-pointer" />
-                    <div className="w-8 h-8 rounded-full bg-primary border-2 border-white shadow-sm cursor-pointer" />
+                      </Card>
+                    ))}
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+
+              {currentStep === "strap" && (
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-foreground">
+                    Strap Style
+                  </h3>
+                  <div className="text-sm text-muted-foreground mb-4">
+                    {selectedStrap.name} - {selectedStrap.color}
+                  </div>
+                  
+                  <div className="space-y-3">
+                    {strapOptions.map((strap) => (
+                      <Card
+                        key={strap.id}
+                        className={`
+                          cursor-pointer transition-all duration-200 p-4 hover:shadow-medium
+                          ${selectedStrap.id === strap.id ? "ring-2 ring-primary" : ""}
+                        `}
+                        onClick={() => setSelectedStrap(strap)}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div
+                            className={`
+                              w-16 rounded-full
+                              ${strap.style === "padded" ? "h-6" : "h-4"}
+                            `}
+                            style={{ backgroundColor: strap.color }}
+                          />
+                          <div className="flex-1">
+                            <div className="font-medium text-foreground">{strap.name}</div>
+                            {strap.price > 0 && (
+                              <div className="text-sm text-fabric-hover">
+                                +₹{strap.price.toLocaleString()}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+
+                  <div className="mt-6 p-4 bg-muted rounded-lg">
+                    <h4 className="font-medium text-foreground mb-2">Strap Colour</h4>
+                    <div className="flex gap-2">
+                      <div className="w-8 h-8 rounded-full bg-bag-strap border-2 border-white shadow-sm cursor-pointer" />
+                      <div className="w-8 h-8 rounded-full bg-primary border-2 border-white shadow-sm cursor-pointer" />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </DialogContent>
