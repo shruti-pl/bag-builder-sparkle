@@ -203,44 +203,37 @@ export const BagCustomizer = () => {
             </div>
 
             {/* Bag Preview */}
-            <div className="flex-1 flex items-center justify-center p-8">
-              <div className="relative w-96 h-96">
+            <div className="flex-1 flex items-center justify-center p-16">
+              <div className="relative w-72 h-72">
+                {/* Strap - positioned above the bag */}
+                <div
+                  className={`
+                    absolute -top-8 left-1/2 transform -translate-x-1/2 w-60 rounded-full shadow-lg transition-all duration-500 border border-gray-400
+                    ${selectedStrap.style === "padded" ? "h-8" : "h-4"}
+                  `}
+                  style={{ backgroundColor: selectedStrapColor.color }}
+                >
+                  {selectedStrap.style === "padded" && (
+                    <div className="absolute inset-1 border border-white/50 rounded-full"></div>
+                  )}
+                </div>
+
                 {/* Main Bag Body */}
                 <div
-                  className="absolute inset-0 rounded-3xl shadow-xl border-4 border-gray-200 transition-all duration-500"
+                  className="w-full h-full rounded-3xl shadow-2xl border border-gray-300 transition-all duration-500"
                   style={{ 
                     backgroundColor: selectedFabric.color,
                     backgroundImage: getPatternBackground(selectedFabric.pattern, selectedFabric.color)
                   }}
                 >
-                  {/* Bag Front Panel */}
-                  <div className="absolute inset-6 border-2 border-white/30 rounded-2xl bg-black/5"></div>
+                  {/* Front Panel */}
+                  <div className="absolute inset-4 border border-white/30 rounded-2xl"></div>
                   
                   {/* Zipper */}
-                  <div className="absolute top-8 left-8 w-32 h-3 bg-gray-600 rounded-full opacity-90 shadow-md"></div>
+                  <div className="absolute top-6 left-6 w-20 h-1 bg-gray-700 rounded-full"></div>
                   
-                  {/* Logo/Brand spot */}
-                  <div className="absolute bottom-8 right-8 w-8 h-8 bg-orange-500 rounded-full opacity-80 shadow-md"></div>
-                  
-                  {/* Side seam */}
-                  <div className="absolute right-0 top-0 bottom-0 w-2 bg-black/20 rounded-r-3xl"></div>
-                </div>
-
-                {/* Strap */}
-                <div
-                  className={`
-                    absolute -top-12 left-1/2 transform -translate-x-1/2 w-80 rounded-full shadow-lg transition-all duration-500 border-2 border-gray-300
-                    ${selectedStrap.style === "padded" ? "h-16" : "h-8"}
-                  `}
-                  style={{ backgroundColor: selectedStrapColor.color }}
-                >
-                  {selectedStrap.style === "padded" && (
-                    <div className="absolute inset-2 border-2 border-white/40 rounded-full bg-white/10"></div>
-                  )}
-                  
-                  {/* Strap connection points */}
-                  <div className="absolute -left-4 top-1/2 transform -translate-y-1/2 w-8 h-6 bg-gray-700 rounded border-2 border-gray-500"></div>
-                  <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-8 h-6 bg-gray-700 rounded border-2 border-gray-500"></div>
+                  {/* Brand Logo */}
+                  <div className="absolute bottom-6 right-6 w-4 h-4 bg-orange-500 rounded-full"></div>
                 </div>
               </div>
             </div>
