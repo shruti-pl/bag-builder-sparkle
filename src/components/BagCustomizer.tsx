@@ -91,13 +91,11 @@ export const BagCustomizer = () => {
         <div className="flex h-full">
           {/* Left Panel - Customization Options */}
           <div className="w-96 bg-card border-r border-border flex flex-col overflow-hidden">
-            {/* Reference Image */}
-            <div className="p-4 border-b border-border">
-              <img 
-                src="/lovable-uploads/d5c367b1-bbc9-40b0-9cdf-bf2bca499f35.png" 
-                alt="Sling bag reference" 
-                className="w-full h-32 object-contain rounded-lg bg-muted"
-              />
+            {/* Header */}
+            <div className="p-6 border-b border-border">
+              <h2 className="text-2xl font-bold text-foreground">
+                Let's build your Sling
+              </h2>
             </div>
 
             {/* Content - Scrollable */}
@@ -186,18 +184,64 @@ export const BagCustomizer = () => {
             </div>
           </div>
 
-          {/* Right Panel - Header and Actions */}
+          {/* Right Panel - Bag Preview and Actions */}
           <div className="flex-1 bg-gradient-surface flex flex-col items-center justify-center p-8">
             <div className="text-center mb-8">
-              <h2 className="text-4xl font-bold text-foreground mb-4">
-                Let's build your Sling
-              </h2>
               <div className="text-3xl font-bold text-foreground mb-2">
                 ₹{totalPrice.toLocaleString()}
               </div>
               {selectedStrap.price > 0 && (
                 <div className="text-sm text-muted-foreground">
                   +₹{selectedStrap.price.toLocaleString()} for strap
+                </div>
+              )}
+            </div>
+
+            {/* Interactive Bag Preview */}
+            <div 
+              className="relative w-96 h-96 mx-auto mb-8"
+              onMouseLeave={handleAreaLeave}
+            >
+              {/* Main Bag Body */}
+              <div
+                className={`
+                  absolute inset-0 rounded-3xl shadow-strong transition-all duration-500 cursor-pointer
+                  ${hoveredArea === "strap" ? "opacity-30" : "opacity-100"}
+                `}
+                style={{ 
+                  backgroundColor: selectedFabric.color,
+                  backgroundImage: getPatternBackground(selectedFabric.pattern, selectedFabric.color)
+                }}
+                onMouseEnter={() => handleAreaHover("bag")}
+                onClick={() => handleAreaClick("bag")}
+              >
+                {/* Bag details */}
+                <div className="absolute inset-4 border border-white/20 rounded-2xl"></div>
+                <div className="absolute top-8 left-8 w-8 h-8 bg-primary rounded-full opacity-80"></div>
+              </div>
+
+              {/* Strap */}
+              <div
+                className={`
+                  absolute -top-8 left-1/2 transform -translate-x-1/2 w-80 h-16 rounded-full shadow-medium transition-all duration-500 cursor-pointer
+                  ${hoveredArea === "bag" ? "opacity-30" : "opacity-100"}
+                  ${selectedStrap.style === "padded" ? "h-20" : "h-12"}
+                `}
+                style={{ backgroundColor: selectedStrap.color }}
+                onMouseEnter={() => handleAreaHover("strap")}
+                onClick={() => handleAreaClick("strap")}
+              >
+                {selectedStrap.style === "padded" && (
+                  <div className="absolute inset-2 border border-white/30 rounded-full"></div>
+                )}
+              </div>
+
+              {/* Interactive indicators */}
+              {hoveredArea && (
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2">
+                  <Badge variant="secondary" className="animate-pulse">
+                    Click to customize {hoveredArea}
+                  </Badge>
                 </div>
               )}
             </div>
