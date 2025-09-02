@@ -256,7 +256,7 @@ export const BagCustomizer = () => {
             </div>
 
             {/* Add to Cart Button */}
-            <div className="p-4 flex justify-center">
+            <div className="px-8 pb-8 pt-2 flex justify-center">
               <Button 
                 className="bg-orange-500 hover:bg-orange-600 text-white px-12 py-6 text-lg rounded-xl font-semibold"
                 onClick={() => {
