@@ -66,22 +66,22 @@ export const BagCustomizer = () => {
       </DialogTrigger>
       
       <DialogContent className="max-w-7xl h-[90vh] p-0 bg-white border-0 rounded-none overflow-hidden">
-        <div className="flex h-full relative bg-yellow-200">
+        <div className="flex h-full relative">
           {/* Left Panel - Customization Options */}
-          <div className="w-96 bg-blue-200 flex flex-col h-full border-4 border-blue-600">
+          <div className="w-96 bg-white flex flex-col h-full border-r border-gray-200">
             {/* Header */}
-            <div className="p-6 flex-shrink-0 border-b border-gray-100 bg-green-200">
+            <div className="p-6 flex-shrink-0 border-b border-gray-100">
               <h2 className="text-3xl font-bold text-black">
                 Let's build your Sling
               </h2>
             </div>
 
-            {/* Content - Scrollable with invisible scrollbar */}
-            <div className="flex-1 overflow-y-auto scrollbar-hide min-h-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-              <div className="p-6 space-y-8 pb-20">
+            {/* Content - Scrollable */}
+            <div className="flex-1 overflow-y-auto min-h-0">
+              <div className="p-6 space-y-12">
                 {/* Bag Fabric Section */}
                 <div>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-6">
                     <h3 className="text-xl font-bold text-black">Bag Fabric</h3>
                     <div className="text-sm text-gray-500">{selectedFabric.name}</div>
                   </div>
@@ -121,7 +121,7 @@ export const BagCustomizer = () => {
 
                 {/* Strap Style Section */}
                 <div>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-6">
                     <h3 className="text-xl font-bold text-black">Strap Style</h3>
                     <div className="text-sm text-gray-500">{selectedStrap.name}</div>
                   </div>
@@ -153,7 +153,7 @@ export const BagCustomizer = () => {
                           )}
                         </Card>
                         {strap.price > 0 && (
-                          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
+                          <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
                             +₹{strap.price.toLocaleString()}.00
                           </div>
                         )}
@@ -163,10 +163,10 @@ export const BagCustomizer = () => {
                 </div>
 
                 {/* Strap Colour Section */}
-                <div>
-                  <div className="flex items-center justify-between mb-4">
+                <div className="pb-8">
+                  <div className="flex items-center justify-between mb-6">
                     <h3 className="text-xl font-bold text-black">Strap Colour</h3>
-                    <div className="text-sm text-gray-500">Lite Strap - {selectedStrapColor.name}</div>
+                    <div className="text-sm text-gray-500">{selectedStrapColor.name}</div>
                   </div>
                   
                   <div className="flex gap-4">
@@ -185,7 +185,7 @@ export const BagCustomizer = () => {
                           />
                         </Card>
                         {color.price > 0 && (
-                          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
+                          <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
                             +₹{color.price.toLocaleString()}.00
                           </div>
                         )}
