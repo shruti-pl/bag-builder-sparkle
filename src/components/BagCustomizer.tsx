@@ -22,61 +22,32 @@ type StrapType = {
 
 const fabricOptions: FabricType[] = [
   { id: "black-carbon", name: "Black Carbon", pattern: "carbon-fiber", color: "#1a1a1a" },
-  { id: "red-grid", name: "Red Grid", pattern: "grid", color: "#dc2626" },
+  { id: "red-grid", name: "Gridstop Chili", pattern: "grid", color: "#dc2626" },
   { id: "green-diamond", name: "Green Diamond", pattern: "diamond", color: "#16a34a" },
   { id: "brown-leather", name: "Brown Leather", pattern: "leather", color: "#a16207" },
   { id: "blue-wave", name: "Blue Wave", pattern: "wave", color: "#2563eb" },
-  { id: "black-mesh", name: "Black Mesh", pattern: "mesh", color: "#374151" },
+  { id: "black-mesh", name: "Gridstop Black", pattern: "mesh", color: "#374151" },
 ];
 
 const strapOptions: StrapType[] = [
   { id: "flat-black", name: "Flat Strap", style: "flat", color: "#1a1a1a", price: 0 },
-  { id: "padded-orange", name: "Padded Strap", style: "padded", color: "#ea580c", price: 1100 },
+  { id: "padded-orange", name: "Lite Strap", style: "padded", color: "#ea580c", price: 2100 },
+];
+
+const strapColors = [
+  { id: "black", name: "Black", color: "#1a1a1a", price: 0 },
+  { id: "gray", name: "Gray", color: "#6b7280", price: 1100 },
 ];
 
 export const BagCustomizer = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedFabric, setSelectedFabric] = useState(fabricOptions[0]);
+  const [selectedFabric, setSelectedFabric] = useState(fabricOptions[1]); // Start with Gridstop Chili
   const [selectedStrap, setSelectedStrap] = useState(strapOptions[0]);
-  const [currentStep, setCurrentStep] = useState<"fabric" | "strap">("fabric");
-  const [hoveredArea, setHoveredArea] = useState<"bag" | "strap" | null>(null);
-  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [selectedStrapColor, setSelectedStrapColor] = useState(strapColors[0]);
+  const [hoveredFabric, setHoveredFabric] = useState<string | null>(null);
 
   const basePrice = 8100;
-  const totalPrice = basePrice + selectedStrap.price;
-
-  useEffect(() => {
-    return () => {
-      if (hoverTimeout) {
-        clearTimeout(hoverTimeout);
-      }
-    };
-  }, [hoverTimeout]);
-
-  const handleAreaHover = (area: "bag" | "strap") => {
-    setHoveredArea(area);
-    
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-    }
-    
-    const timeout = setTimeout(() => {
-      setHoveredArea(null);
-    }, 5000);
-    
-    setHoverTimeout(timeout);
-  };
-
-  const handleAreaLeave = () => {
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-    }
-    setHoveredArea(null);
-  };
-
-  const handleAreaClick = (area: "bag" | "strap") => {
-    setCurrentStep(area === "bag" ? "fabric" : "strap");
-  };
+  const totalPrice = basePrice + selectedStrap.price + selectedStrapColor.price;
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -87,193 +58,180 @@ export const BagCustomizer = () => {
         </Button>
       </DialogTrigger>
       
-      <DialogContent className="max-w-6xl h-[90vh] p-0 bg-gradient-surface border-0 rounded-2xl overflow-hidden">
-        <div className="flex h-full">
+      <DialogContent className="max-w-7xl h-[90vh] p-0 bg-white border-0 rounded-none overflow-hidden">
+        <div className="flex h-full relative">
           {/* Left Panel - Customization Options */}
-          <div className="w-96 bg-card border-r border-border flex flex-col overflow-hidden">
+          <div className="w-96 bg-white flex flex-col overflow-hidden">
             {/* Header */}
-            <div className="p-6 border-b border-border">
-              <h2 className="text-2xl font-bold text-foreground">
+            <div className="p-6">
+              <h2 className="text-3xl font-bold text-black">
                 Let's build your Sling
               </h2>
             </div>
 
             {/* Content - Scrollable */}
-            <div className="flex-1 p-6 overflow-y-auto">
+            <div className="flex-1 p-6 overflow-y-auto space-y-8">
               {/* Bag Fabric Section */}
-              <div className="mb-8">
-                <div className="flex items-center gap-2 mb-4">
-                  <Palette className="h-5 w-5 text-primary" />
-                  <h3 className="text-lg font-semibold text-foreground">Bag Fabric</h3>
-                </div>
-                <div className="text-sm text-muted-foreground mb-4">
-                  {selectedFabric.name}
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-bold text-black">Bag Fabric</h3>
+                  <div className="text-sm text-gray-500">{selectedFabric.name}</div>
                 </div>
                 
                 <div className="grid grid-cols-3 gap-3">
                   {fabricOptions.map((fabric) => (
-                    <Card
-                      key={fabric.id}
-                      className={`
-                        aspect-square cursor-pointer transition-all duration-200 p-2 hover:shadow-medium
-                        ${selectedFabric.id === fabric.id ? "ring-2 ring-primary" : ""}
-                      `}
-                      onClick={() => setSelectedFabric(fabric)}
-                    >
-                      <div
-                        className="w-full h-full rounded-lg"
-                        style={{
-                          backgroundColor: fabric.color,
-                          backgroundImage: getPatternBackground(fabric.pattern, fabric.color)
-                        }}
-                      />
-                    </Card>
+                    <div key={fabric.id} className="relative">
+                      <Card
+                        className={`
+                          aspect-square cursor-pointer transition-all duration-200 p-2 hover:shadow-lg border-2
+                          ${selectedFabric.id === fabric.id ? "border-black" : "border-gray-200"}
+                        `}
+                        onClick={() => setSelectedFabric(fabric)}
+                        onMouseEnter={() => setHoveredFabric(fabric.id)}
+                        onMouseLeave={() => setHoveredFabric(null)}
+                      >
+                        <div
+                          className="w-full h-full rounded-lg"
+                          style={{
+                            backgroundColor: fabric.color,
+                            backgroundImage: getPatternBackground(fabric.pattern, fabric.color)
+                          }}
+                        />
+                      </Card>
+                      {hoveredFabric === fabric.id && (
+                        <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap z-10">
+                          {fabric.name}
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               </div>
 
               {/* Strap Style Section */}
               <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <Settings className="h-5 w-5 text-primary" />
-                  <h3 className="text-lg font-semibold text-foreground">Strap Style</h3>
-                </div>
-                <div className="text-sm text-muted-foreground mb-4">
-                  {selectedStrap.name} - {selectedStrap.color}
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-bold text-black">Strap Style</h3>
+                  <div className="text-sm text-gray-500">{selectedStrap.name}</div>
                 </div>
                 
-                <div className="space-y-3">
+                <div className="flex gap-4">
                   {strapOptions.map((strap) => (
-                    <Card
-                      key={strap.id}
-                      className={`
-                        cursor-pointer transition-all duration-200 p-4 hover:shadow-medium
-                        ${selectedStrap.id === strap.id ? "ring-2 ring-primary" : ""}
-                      `}
-                      onClick={() => setSelectedStrap(strap)}
-                    >
-                      <div className="flex items-center gap-3">
+                    <div key={strap.id} className="relative">
+                      <Card
+                        className={`
+                          w-20 h-20 cursor-pointer transition-all duration-200 p-3 hover:shadow-lg border-2 rounded-full
+                          ${selectedStrap.id === strap.id ? "border-black" : "border-gray-200"}
+                        `}
+                        onClick={() => setSelectedStrap(strap)}
+                      >
                         <div
                           className={`
-                            w-16 rounded-full
-                            ${strap.style === "padded" ? "h-6" : "h-4"}
+                            w-full rounded-full
+                            ${strap.style === "padded" ? "h-6 border-2 border-white" : "h-4"}
                           `}
                           style={{ backgroundColor: strap.color }}
                         />
-                        <div className="flex-1">
-                          <div className="font-medium text-foreground">{strap.name}</div>
-                          {strap.price > 0 && (
-                            <div className="text-sm text-fabric-hover">
-                              +₹{strap.price.toLocaleString()}
-                            </div>
-                          )}
+                      </Card>
+                      {strap.price > 0 && (
+                        <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
+                          +₹{strap.price.toLocaleString()}.00
                         </div>
-                      </div>
-                    </Card>
+                      )}
+                    </div>
                   ))}
                 </div>
+              </div>
 
-                <div className="mt-6 p-4 bg-muted rounded-lg">
-                  <h4 className="font-medium text-foreground mb-2">Strap Colour</h4>
-                  <div className="flex gap-2">
-                    <div className="w-8 h-8 rounded-full bg-bag-strap border-2 border-white shadow-sm cursor-pointer" />
-                    <div className="w-8 h-8 rounded-full bg-primary border-2 border-white shadow-sm cursor-pointer" />
-                  </div>
+              {/* Strap Colour Section */}
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-bold text-black">Strap Colour</h3>
+                  <div className="text-sm text-gray-500">Lite Strap - {selectedStrapColor.name}</div>
+                </div>
+                
+                <div className="flex gap-4">
+                  {strapColors.map((color) => (
+                    <div key={color.id} className="relative">
+                      <Card
+                        className={`
+                          w-16 h-16 cursor-pointer transition-all duration-200 p-2 hover:shadow-lg border-2 rounded-full
+                          ${selectedStrapColor.id === color.id ? "border-black" : "border-gray-200"}
+                        `}
+                        onClick={() => setSelectedStrapColor(color)}
+                      >
+                        <div
+                          className="w-full h-full rounded-full"
+                          style={{ backgroundColor: color.color }}
+                        />
+                      </Card>
+                      {color.price > 0 && (
+                        <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
+                          +₹{color.price.toLocaleString()}.00
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Panel - Bag Preview and Actions */}
-          <div className="flex-1 bg-gradient-surface flex flex-col items-center justify-center p-8">
-            <div className="text-center mb-8">
-              <div className="text-3xl font-bold text-foreground mb-2">
-                ₹{totalPrice.toLocaleString()}
-              </div>
-              {selectedStrap.price > 0 && (
-                <div className="text-sm text-muted-foreground">
-                  +₹{selectedStrap.price.toLocaleString()} for strap
-                </div>
-              )}
-            </div>
-
-            {/* Interactive Bag Preview */}
-            <div 
-              className="relative w-96 h-96 mx-auto mb-8"
-              onMouseLeave={handleAreaLeave}
-            >
-              {/* Main Bag Body */}
-              <div
-                className={`
-                  absolute inset-0 rounded-3xl shadow-strong transition-all duration-500 cursor-pointer
-                  ${hoveredArea === "strap" ? "opacity-30" : "opacity-100"}
-                `}
-                style={{ 
-                  backgroundColor: selectedFabric.color,
-                  backgroundImage: getPatternBackground(selectedFabric.pattern, selectedFabric.color)
-                }}
-                onMouseEnter={() => handleAreaHover("bag")}
-                onClick={() => handleAreaClick("bag")}
-              >
-                {/* Bag details */}
-                <div className="absolute inset-4 border border-white/20 rounded-2xl"></div>
-                <div className="absolute top-8 left-8 w-8 h-8 bg-primary rounded-full opacity-80"></div>
-              </div>
-
-              {/* Strap */}
-              <div
-                className={`
-                  absolute -top-8 left-1/2 transform -translate-x-1/2 w-80 h-16 rounded-full shadow-medium transition-all duration-500 cursor-pointer
-                  ${hoveredArea === "bag" ? "opacity-30" : "opacity-100"}
-                  ${selectedStrap.style === "padded" ? "h-20" : "h-12"}
-                `}
-                style={{ backgroundColor: selectedStrap.color }}
-                onMouseEnter={() => handleAreaHover("strap")}
-                onClick={() => handleAreaClick("strap")}
-              >
-                {selectedStrap.style === "padded" && (
-                  <div className="absolute inset-2 border border-white/30 rounded-full"></div>
-                )}
-              </div>
-
-              {/* Interactive indicators */}
-              {hoveredArea && (
-                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2">
-                  <Badge variant="secondary" className="animate-pulse">
-                    Click to customize {hoveredArea}
-                  </Badge>
-                </div>
-              )}
-            </div>
-
-            <div className="flex gap-4 mb-8">
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="flex items-center gap-2"
-              >
-                <Download className="h-5 w-5" />
-                Download
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="flex items-center gap-2"
-              >
+          {/* Right Panel - Price and Bag Preview */}
+          <div className="flex-1 bg-gray-50 flex flex-col relative">
+            {/* Top Bar with Price and Actions */}
+            <div className="absolute top-6 right-6 flex items-center gap-4 z-10">
+              <div className="text-2xl font-bold text-black">₹{totalPrice.toLocaleString()}.00</div>
+              <Button variant="ghost" size="sm" className="p-2">
                 <ZoomOut className="h-5 w-5" />
-                Zoom Out
+              </Button>
+              <Button variant="ghost" size="sm" className="p-2">
+                <Download className="h-5 w-5" />
               </Button>
             </div>
 
-            <Button 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-12 py-6 text-lg rounded-xl shadow-medium"
-              onClick={() => {
-                setIsOpen(false);
-                // Add to cart logic would go here
-              }}
-            >
-              Add to cart
-            </Button>
+            {/* Bag Preview */}
+            <div className="flex-1 flex items-center justify-center p-8">
+              <div className="relative w-96 h-96">
+                <div
+                  className="absolute inset-0 rounded-3xl shadow-lg transition-all duration-500"
+                  style={{ 
+                    backgroundColor: selectedFabric.color,
+                    backgroundImage: getPatternBackground(selectedFabric.pattern, selectedFabric.color)
+                  }}
+                >
+                  {/* Bag details */}
+                  <div className="absolute inset-4 border border-white/20 rounded-2xl"></div>
+                  <div className="absolute top-8 left-8 w-8 h-8 bg-orange-500 rounded-full opacity-80"></div>
+                </div>
+
+                {/* Strap */}
+                <div
+                  className={`
+                    absolute -top-8 left-1/2 transform -translate-x-1/2 w-80 rounded-full shadow-md transition-all duration-500
+                    ${selectedStrap.style === "padded" ? "h-20" : "h-12"}
+                  `}
+                  style={{ backgroundColor: selectedStrapColor.color }}
+                >
+                  {selectedStrap.style === "padded" && (
+                    <div className="absolute inset-2 border border-white/30 rounded-full"></div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Add to Cart Button */}
+            <div className="p-8 flex justify-center">
+              <Button 
+                className="bg-orange-500 hover:bg-orange-600 text-white px-12 py-6 text-lg rounded-xl font-semibold"
+                onClick={() => {
+                  setIsOpen(false);
+                  // Add to cart logic would go here
+                }}
+              >
+                Add to cart
+              </Button>
+            </div>
           </div>
         </div>
       </DialogContent>
