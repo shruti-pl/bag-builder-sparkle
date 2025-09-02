@@ -69,8 +69,8 @@ export const BagCustomizer = () => {
               </h2>
             </div>
 
-            {/* Content - Scrollable */}
-            <div className="flex-1 p-6 overflow-y-auto space-y-8">
+            {/* Content - Scrollable with invisible scrollbar */}
+            <div className="flex-1 p-6 overflow-y-auto scrollbar-hide space-y-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
               {/* Bag Fabric Section */}
               <div>
                 <div className="flex items-center justify-between mb-4">
