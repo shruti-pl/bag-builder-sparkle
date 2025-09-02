@@ -227,52 +227,12 @@ export const BagCustomizer = () => {
             </DialogHeader>
 
             {/* Bag Preview */}
-            <div 
-              className="relative w-96 h-96 mx-auto mt-16"
-              onMouseLeave={handleAreaLeave}
-            >
-              {/* Main Bag Body */}
-              <div
-                className={`
-                  absolute inset-0 rounded-3xl shadow-strong transition-all duration-500 cursor-pointer
-                  ${hoveredArea === "strap" ? "opacity-30" : "opacity-100"}
-                `}
-                style={{ 
-                  backgroundColor: selectedFabric.color,
-                  backgroundImage: getPatternBackground(selectedFabric.pattern, selectedFabric.color)
-                }}
-                onMouseEnter={() => handleAreaHover("bag")}
-                onClick={() => handleAreaClick("bag")}
-              >
-                {/* Bag details */}
-                <div className="absolute inset-4 border border-white/20 rounded-2xl"></div>
-                <div className="absolute top-8 left-8 w-8 h-8 bg-primary rounded-full opacity-80"></div>
-              </div>
-
-              {/* Strap */}
-              <div
-                className={`
-                  absolute -top-8 left-1/2 transform -translate-x-1/2 w-80 h-16 rounded-full shadow-medium transition-all duration-500 cursor-pointer
-                  ${hoveredArea === "bag" ? "opacity-30" : "opacity-100"}
-                  ${selectedStrap.style === "padded" ? "h-20" : "h-12"}
-                `}
-                style={{ backgroundColor: selectedStrap.color }}
-                onMouseEnter={() => handleAreaHover("strap")}
-                onClick={() => handleAreaClick("strap")}
-              >
-                {selectedStrap.style === "padded" && (
-                  <div className="absolute inset-2 border border-white/30 rounded-full"></div>
-                )}
-              </div>
-
-              {/* Interactive indicators */}
-              {hoveredArea && (
-                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2">
-                  <Badge variant="secondary" className="animate-pulse">
-                    Click to customize {hoveredArea}
-                  </Badge>
-                </div>
-              )}
+            <div className="relative w-96 h-96 mx-auto mt-16">
+              <img 
+                src="/lovable-uploads/bab08106-bd68-416e-bd24-55fb7f90d419.png" 
+                alt="Sling bag" 
+                className="w-full h-full object-contain"
+              />
             </div>
 
             <Button 
