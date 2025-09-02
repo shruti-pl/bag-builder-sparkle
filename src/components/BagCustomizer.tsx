@@ -203,16 +203,24 @@ export const BagCustomizer = () => {
             </div>
 
             {/* Bag Preview */}
-            <div className="flex-1 flex items-center justify-center p-16">
-              <div className="relative w-72 h-72">
+            <div className="flex-1 flex items-center justify-center p-16 bg-gray-100">
+              <div className="relative w-72 h-72 bg-red-200 border-4 border-red-500">
+                {/* Debug: This red box should be visible */}
+                <div className="absolute inset-0 flex items-center justify-center text-red-800 font-bold">
+                  DEBUG: Container visible
+                </div>
+                
                 {/* Strap - positioned above the bag */}
                 <div
                   className={`
-                    absolute -top-8 left-1/2 transform -translate-x-1/2 w-60 rounded-full shadow-lg transition-all duration-500 border border-gray-400
+                    absolute -top-8 left-1/2 transform -translate-x-1/2 w-60 rounded-full shadow-lg transition-all duration-500 border-4 border-blue-500 z-10
                     ${selectedStrap.style === "padded" ? "h-8" : "h-4"}
                   `}
                   style={{ backgroundColor: selectedStrapColor.color }}
                 >
+                  <div className="absolute inset-0 flex items-center justify-center text-xs text-white font-bold">
+                    STRAP
+                  </div>
                   {selectedStrap.style === "padded" && (
                     <div className="absolute inset-1 border border-white/50 rounded-full"></div>
                   )}
@@ -220,12 +228,16 @@ export const BagCustomizer = () => {
 
                 {/* Main Bag Body */}
                 <div
-                  className="w-full h-full rounded-3xl shadow-2xl border border-gray-300 transition-all duration-500"
+                  className="absolute inset-4 rounded-3xl shadow-2xl border-4 border-green-500 transition-all duration-500 z-5"
                   style={{ 
                     backgroundColor: selectedFabric.color,
                     backgroundImage: getPatternBackground(selectedFabric.pattern, selectedFabric.color)
                   }}
                 >
+                  <div className="absolute inset-0 flex items-center justify-center text-white font-bold">
+                    BAG
+                  </div>
+                  
                   {/* Front Panel */}
                   <div className="absolute inset-4 border border-white/30 rounded-2xl"></div>
                   
