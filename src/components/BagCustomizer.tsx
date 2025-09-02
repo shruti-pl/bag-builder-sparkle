@@ -87,8 +87,8 @@ export const BagCustomizer = () => {
                           ${selectedFabric.id === fabric.id ? "border-black" : "border-gray-200"}
                         `}
                         onClick={() => setSelectedFabric(fabric)}
-                        onMouseEnter={() => setHoveredFabric(fabric.id)}
-                        onMouseLeave={() => setHoveredFabric(null)}
+                        {/* onMouseEnter={() => setHoveredFabric(fabric.id)} */}
+                        {/* onMouseLeave={() => setHoveredFabric(null)} */}
                       >
                         <div
                           className="w-full h-full rounded-lg"
