@@ -49,8 +49,8 @@ export const BagCustomizer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedFabric, setSelectedFabric] = useState(fabricOptions[1]); // Start with Gridstop Chili
   const [selectedStrap, setSelectedStrap] = useState(strapOptions[0]);
-  const [selectedStrapColor, setSelectedStrapColor] = useState(strapColors[0]);
-  const [selectedCarabiner, setSelectedCarabiner] = useState(carabinerOptions[0]);
+  const [selectedStrapColor, setSelectedStrapColor] = useState(strapColors[0]); // Force cache refresh
+  const [selectedCarabiner, setSelectedCarabiner] = useState(carabinerOptions[0]); // Carabiner state
   const [hoveredFabric, setHoveredFabric] = useState<string | null>(null);
   const [hoveredStrap, setHoveredStrap] = useState<string | null>(null);
   const [hoveredStrapColor, setHoveredStrapColor] = useState<string | null>(null);
