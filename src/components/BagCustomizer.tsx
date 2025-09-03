@@ -49,7 +49,7 @@ export const BagCustomizer = () => {
   const [hoveredStrap, setHoveredStrap] = useState<string | null>(null);
   const [hoveredStrapColor, setHoveredStrapColor] = useState<string | null>(null);
   const [linkCopied, setLinkCopied] = useState(false);
-  const [isZoomedOut, setIsZoomedOut] = useState(false);
+  const [isZoomedOut, setIsZoomedOut] = useState(false); // Toggle between normal and zoomed out view
 
   const basePrice = 8100;
   const totalPrice = basePrice + selectedStrap.price + selectedStrapColor.price;
