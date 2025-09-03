@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { X, Palette, Settings, Download, ZoomOut, ZoomIn, Link, Save } from "lucide-react";
+import { X, Palette, Settings, Download, ZoomOut, Link, Save } from "lucide-react";
 
 type FabricType = {
   id: string;
@@ -101,12 +101,11 @@ export const BagCustomizer = () => {
     }
   };
 
-  const handleZoomOut = () => {
-    setZoomLevel(prev => Math.max(0.5, prev - 0.25));
-  };
-
-  const handleZoomIn = () => {
-    setZoomLevel(prev => Math.min(2, prev + 0.25));
+  const handleZoom = () => {
+    const zoomLevels = [0.5, 1, 1.5, 2];
+    const currentIndex = zoomLevels.indexOf(zoomLevel);
+    const nextIndex = (currentIndex + 1) % zoomLevels.length;
+    setZoomLevel(zoomLevels[nextIndex]);
   };
 
   // Debug logging
@@ -295,11 +294,9 @@ export const BagCustomizer = () => {
 
             {/* Action Buttons on Right */}
             <div className="absolute top-6 right-6 flex items-center gap-4 z-10">
-              <Button variant="ghost" size="sm" className="p-2" onClick={handleZoomOut}>
+              <Button variant="ghost" size="sm" className="p-2 flex items-center gap-1" onClick={handleZoom}>
                 <ZoomOut className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="sm" className="p-2" onClick={handleZoomIn}>
-                <ZoomIn className="h-5 w-5" />
+                <span className="text-xs">{Math.round(zoomLevel * 100)}%</span>
               </Button>
               <Popover>
                 <PopoverTrigger asChild>
