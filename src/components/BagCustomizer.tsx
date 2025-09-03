@@ -101,6 +101,7 @@ export const BagCustomizer = () => {
     }
   };
 
+  // Combined zoom function that cycles through zoom levels
   const handleZoom = () => {
     const zoomLevels = [0.5, 1, 1.5, 2];
     const currentIndex = zoomLevels.indexOf(zoomLevel);
