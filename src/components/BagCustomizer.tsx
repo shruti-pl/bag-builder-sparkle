@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { X, Palette, Settings, Download, ZoomOut, Link, Save } from "lucide-react";
+import { X, Palette, Settings, Download, ZoomOut, ZoomIn, Link, Save } from "lucide-react";
 
 type FabricType = {
   id: string;
@@ -49,6 +49,7 @@ export const BagCustomizer = () => {
   const [hoveredStrap, setHoveredStrap] = useState<string | null>(null);
   const [hoveredStrapColor, setHoveredStrapColor] = useState<string | null>(null);
   const [linkCopied, setLinkCopied] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(1);
 
   const basePrice = 8100;
   const totalPrice = basePrice + selectedStrap.price + selectedStrapColor.price;
@@ -98,6 +99,14 @@ export const BagCustomizer = () => {
         }
       }, 'image/png');
     }
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel(prev => Math.max(0.5, prev - 0.25));
+  };
+
+  const handleZoomIn = () => {
+    setZoomLevel(prev => Math.min(2, prev + 0.25));
   };
 
   // Debug logging
@@ -286,8 +295,11 @@ export const BagCustomizer = () => {
 
             {/* Action Buttons on Right */}
             <div className="absolute top-6 right-6 flex items-center gap-4 z-10">
-              <Button variant="ghost" size="sm" className="p-2">
+              <Button variant="ghost" size="sm" className="p-2" onClick={handleZoomOut}>
                 <ZoomOut className="h-5 w-5" />
+              </Button>
+              <Button variant="ghost" size="sm" className="p-2" onClick={handleZoomIn}>
+                <ZoomIn className="h-5 w-5" />
               </Button>
               <Popover>
                 <PopoverTrigger asChild>
@@ -320,7 +332,10 @@ export const BagCustomizer = () => {
 
             {/* Bag Preview */}
             <div className="flex-1 flex items-center justify-center px-16 pt-16 pb-4 bg-gray-100">
-              <div className="relative w-80 h-80 overflow-hidden">
+              <div 
+                className="relative w-80 h-80 overflow-hidden transition-transform duration-300"
+                style={{ transform: `scale(${zoomLevel})` }}
+              >
                 {/* Strap - positioned within the container */}
                 <div
                   className={`
