@@ -50,14 +50,16 @@ export const BagCustomizer = () => {
   const [selectedFabric, setSelectedFabric] = useState(fabricOptions[1]); // Start with Gridstop Chili
   const [selectedStrap, setSelectedStrap] = useState(strapOptions[0]);
   const [selectedStrapColor, setSelectedStrapColor] = useState(strapColors[0]);
+  const [selectedCarabiner, setSelectedCarabiner] = useState(carabinerOptions[0]);
   const [hoveredFabric, setHoveredFabric] = useState<string | null>(null);
   const [hoveredStrap, setHoveredStrap] = useState<string | null>(null);
   const [hoveredStrapColor, setHoveredStrapColor] = useState<string | null>(null);
+  const [hoveredCarabiner, setHoveredCarabiner] = useState<string | null>(null);
   const [linkCopied, setLinkCopied] = useState(false);
   const [isZoomedOut, setIsZoomedOut] = useState(false); // Toggle between normal and zoomed out view
 
   const basePrice = 8100;
-  const totalPrice = basePrice + selectedStrap.price + selectedStrapColor.price;
+  const totalPrice = basePrice + selectedStrap.price + selectedStrapColor.price + selectedCarabiner.price;
 
   const generateImageUrl = () => {
     const bagConfig = {
