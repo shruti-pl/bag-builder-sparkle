@@ -333,18 +333,36 @@ export const BagCustomizer = () => {
                   transformOrigin: 'center'
                 }}
               >
-                <img
-                  src="/lovable-uploads/3687874f-7211-48bf-af0d-272a9f2d9229.png"
-                  alt="Customizable Sling Bag"
-                  className="w-full h-full object-contain transition-all duration-500"
+                {/* Strap - positioned within the container */}
+                <div
+                  className={`
+                    absolute top-4 left-1/2 transform -translate-x-1/2 w-56 rounded-full shadow-lg transition-all duration-500 z-10
+                    ${selectedStrap.style === "padded" ? "h-6" : "h-3"}
+                  `}
+                  style={{ backgroundColor: selectedStrapColor.color }}
+                >
+                  {selectedStrap.style === "padded" && (
+                    <div className="absolute inset-1 border border-white/50 rounded-full"></div>
+                  )}
+                </div>
+
+                {/* Main Bag Body */}
+                <div
+                  className="absolute top-12 left-1/2 transform -translate-x-1/2 w-64 h-64 rounded-3xl shadow-2xl transition-all duration-500"
                   style={{ 
-                    filter: `
-                      hue-rotate(${getHueRotation(selectedFabric.color)}deg) 
-                      saturate(${getSaturation(selectedFabric.color)}) 
-                      brightness(${getBrightness(selectedFabric.color)})
-                    `
+                    backgroundColor: selectedFabric.color,
+                    backgroundImage: getPatternBackground(selectedFabric.pattern, selectedFabric.color)
                   }}
-                />
+                >
+                  {/* Front Panel */}
+                  <div className="absolute inset-4 border border-white/30 rounded-2xl"></div>
+                  
+                  {/* Zipper */}
+                  <div className="absolute top-6 left-6 w-16 h-1 bg-gray-700 rounded-full"></div>
+                  
+                  {/* Brand Logo */}
+                  <div className="absolute bottom-6 right-6 w-3 h-3 bg-orange-500 rounded-full"></div>
+                </div>
               </div>
             </div>
 
@@ -366,48 +384,6 @@ export const BagCustomizer = () => {
     </Dialog>
   );
 };
-
-// Color manipulation functions for bag image
-function hexToHsl(hex: string): [number, number, number] {
-  const r = parseInt(hex.slice(1, 3), 16) / 255;
-  const g = parseInt(hex.slice(3, 5), 16) / 255;
-  const b = parseInt(hex.slice(5, 7), 16) / 255;
-
-  const max = Math.max(r, g, b);
-  const min = Math.min(r, g, b);
-  let h = 0, s = 0, l = (max + min) / 2;
-
-  if (max !== min) {
-    const d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-    switch (max) {
-      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-      case g: h = (b - r) / d + 2; break;
-      case b: h = (r - g) / d + 4; break;
-    }
-    h /= 6;
-  }
-
-  return [h * 360, s * 100, l * 100];
-}
-
-function getHueRotation(targetColor: string): number {
-  const baseHue = 0; // Black base color hue
-  const [targetHue] = hexToHsl(targetColor);
-  return targetHue - baseHue;
-}
-
-function getSaturation(targetColor: string): number {
-  const [, , lightness] = hexToHsl(targetColor);
-  // Increase saturation for lighter colors, decrease for darker
-  return lightness > 50 ? 1.5 : 0.8;
-}
-
-function getBrightness(targetColor: string): number {
-  const [, , lightness] = hexToHsl(targetColor);
-  // Adjust brightness based on target lightness
-  return Math.max(0.3, lightness / 100 * 1.2);
-}
 
 function getPatternBackground(pattern: string, baseColor: string): string {
   switch (pattern) {
