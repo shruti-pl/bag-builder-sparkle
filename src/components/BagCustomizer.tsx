@@ -369,6 +369,19 @@ export const BagCustomizer = () => {
                   
                   {/* Brand Logo */}
                   <div className="absolute bottom-6 right-6 w-3 h-3 bg-orange-500 rounded-full"></div>
+                  
+                  {/* Carabiner - Only show for padded strap */}
+                  {selectedStrap.style === "padded" && (
+                    <div 
+                      className="absolute top-2 right-8 w-4 h-6 border-2 border-l-4 rounded-full"
+                      style={{ borderColor: selectedCarabiner.color }}
+                    >
+                      <div 
+                        className="w-1 h-1 mt-0.5 ml-0.5 rounded-sm"
+                        style={{ backgroundColor: selectedCarabiner.color }}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
