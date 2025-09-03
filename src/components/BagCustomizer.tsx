@@ -389,31 +389,111 @@ function getPatternBackground(pattern: string, baseColor: string): string {
   switch (pattern) {
     case "carbon-fiber":
       return `
-        radial-gradient(circle at 25% 25%, ${baseColor}33 2px, transparent 2px),
-        radial-gradient(circle at 75% 75%, ${baseColor}33 2px, transparent 2px)
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 2px,
+          rgba(255,255,255,0.1) 2px,
+          rgba(255,255,255,0.1) 4px
+        ),
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 2px,
+          rgba(0,0,0,0.1) 2px,
+          rgba(0,0,0,0.1) 4px
+        ),
+        ${baseColor}
       `;
     case "grid":
       return `
-        linear-gradient(${baseColor}33 1px, transparent 1px),
-        linear-gradient(90deg, ${baseColor}33 1px, transparent 1px)
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.8) 0px,
+          rgba(255,255,255,0.8) 1px,
+          transparent 1px,
+          transparent 15px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,0.8) 0px,
+          rgba(255,255,255,0.8) 1px,
+          transparent 1px,
+          transparent 15px
+        ),
+        ${baseColor}
       `;
     case "diamond":
       return `
-        conic-gradient(from 45deg at 50% 50%, ${baseColor}33 90deg, transparent 90deg)
+        repeating-linear-gradient(
+          45deg,
+          rgba(255,255,255,0.6) 0px,
+          rgba(255,255,255,0.6) 1px,
+          transparent 1px,
+          transparent 12px
+        ),
+        repeating-linear-gradient(
+          -45deg,
+          rgba(255,255,255,0.6) 0px,
+          rgba(255,255,255,0.6) 1px,
+          transparent 1px,
+          transparent 12px
+        ),
+        ${baseColor}
       `;
     case "leather":
       return `
-        radial-gradient(circle at 20% 20%, ${baseColor}22 1px, transparent 1px),
-        radial-gradient(circle at 80% 80%, ${baseColor}22 1px, transparent 1px)
+        repeating-linear-gradient(
+          45deg,
+          rgba(255,255,255,0.4) 0px,
+          rgba(255,255,255,0.4) 1px,
+          transparent 1px,
+          transparent 10px
+        ),
+        repeating-linear-gradient(
+          -45deg,
+          rgba(255,255,255,0.4) 0px,
+          rgba(255,255,255,0.4) 1px,
+          transparent 1px,
+          transparent 10px
+        ),
+        ${baseColor}
       `;
     case "wave":
       return `
-        repeating-linear-gradient(45deg, ${baseColor}33, ${baseColor}33 2px, transparent 2px, transparent 8px)
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.5) 0px,
+          rgba(255,255,255,0.5) 1px,
+          transparent 1px,
+          transparent 12px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,0.5) 0px,
+          rgba(255,255,255,0.5) 1px,
+          transparent 1px,
+          transparent 12px
+        ),
+        ${baseColor}
       `;
     case "mesh":
       return `
-        repeating-linear-gradient(0deg, ${baseColor}33, ${baseColor}33 1px, transparent 1px, transparent 4px),
-        repeating-linear-gradient(90deg, ${baseColor}33, ${baseColor}33 1px, transparent 1px, transparent 4px)
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.7) 0px,
+          rgba(255,255,255,0.7) 1px,
+          transparent 1px,
+          transparent 8px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,0.7) 0px,
+          rgba(255,255,255,0.7) 1px,
+          transparent 1px,
+          transparent 8px
+        ),
+        ${baseColor}
       `;
     default:
       return "none";
