@@ -3,7 +3,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { X, Palette, Settings, Download, ZoomOut } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { X, Palette, Settings, Download, ZoomOut, Link, Save } from "lucide-react";
 
 type FabricType = {
   id: string;
@@ -50,6 +51,46 @@ export const BagCustomizer = () => {
 
   const basePrice = 8100;
   const totalPrice = basePrice + selectedStrap.price + selectedStrapColor.price;
+
+  const generateImageUrl = () => {
+    const bagConfig = {
+      fabric: selectedFabric.id,
+      strap: selectedStrap.id,
+      strapColor: selectedStrapColor.id
+    };
+    return `${window.location.origin}/bag-preview?config=${encodeURIComponent(JSON.stringify(bagConfig))}`;
+  };
+
+  const copyImageLink = async () => {
+    try {
+      await navigator.clipboard.writeText(generateImageUrl());
+    } catch (err) {
+      console.error('Failed to copy link:', err);
+    }
+  };
+
+  const saveImage = () => {
+    const bagPreview = document.querySelector('.bag-preview-container');
+    if (bagPreview) {
+      // For now, we'll trigger a download of the current bag configuration
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = 320;
+      canvas.height = 320;
+      
+      // Draw bag background
+      if (ctx) {
+        ctx.fillStyle = selectedFabric.color;
+        ctx.fillRect(80, 48, 256, 256);
+        
+        // Create download link
+        const link = document.createElement('a');
+        link.download = `custom-bag-${Date.now()}.png`;
+        link.href = canvas.toDataURL();
+        link.click();
+      }
+    }
+  };
 
   // Debug logging
   useEffect(() => {
@@ -236,9 +277,33 @@ export const BagCustomizer = () => {
               <Button variant="ghost" size="sm" className="p-2">
                 <ZoomOut className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="sm" className="p-2">
-                <Download className="h-5 w-5" />
-              </Button>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="ghost" size="sm" className="p-2">
+                    <Download className="h-5 w-5" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-48 p-2" align="end">
+                  <div className="space-y-1">
+                    <Button 
+                      variant="ghost" 
+                      className="w-full justify-start h-auto py-2 px-3 text-sm" 
+                      onClick={copyImageLink}
+                    >
+                      <Link className="mr-2 h-4 w-4" />
+                      Copy link
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      className="w-full justify-start h-auto py-2 px-3 text-sm" 
+                      onClick={saveImage}
+                    >
+                      <Save className="mr-2 h-4 w-4" />
+                      Save image
+                    </Button>
+                  </div>
+                </PopoverContent>
+              </Popover>
             </div>
 
             {/* Bag Preview */}
