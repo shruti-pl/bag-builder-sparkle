@@ -40,6 +40,11 @@ const strapColors = [
   { id: "gray", name: "Gray", color: "#6b7280", price: 1100 },
 ];
 
+const carabinerOptions = [
+  { id: "orange", name: "Orange (Set)", color: "#ea580c", price: 0 },
+  { id: "black", name: "Black", color: "#1a1a1a", price: 500 },
+];
+
 export const BagCustomizer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedFabric, setSelectedFabric] = useState(fabricOptions[1]); // Start with Gridstop Chili
