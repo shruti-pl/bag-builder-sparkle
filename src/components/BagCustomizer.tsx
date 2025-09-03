@@ -279,9 +279,13 @@ export const BagCustomizer = () => {
 
           {/* Right Panel - Price and Bag Preview */}
           <div className="flex-1 bg-gray-50 flex flex-col relative">
-            {/* Top Bar with Price and Actions */}
-            <div className="absolute top-6 right-6 flex items-center gap-4 z-10">
+            {/* Price on Left */}
+            <div className="absolute top-6 left-6 z-10">
               <div className="text-2xl font-bold text-black">₹{totalPrice.toLocaleString()}.00</div>
+            </div>
+
+            {/* Action Buttons on Right */}
+            <div className="absolute top-6 right-6 flex items-center gap-4 z-10">
               <Button variant="ghost" size="sm" className="p-2">
                 <ZoomOut className="h-5 w-5" />
               </Button>
