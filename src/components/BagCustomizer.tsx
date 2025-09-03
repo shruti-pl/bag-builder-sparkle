@@ -246,10 +246,10 @@ export const BagCustomizer = () => {
                   </div>
                 </div>
 
-                {/* Strap Colour Section */}
+                {/* Rope Colour Section */}
                 <div className="pb-8">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-xl font-bold text-black">Strap Colour</h3>
+                    <h3 className="text-xl font-bold text-black">Rope Colour</h3>
                     <div className="text-sm text-gray-500">{selectedStrapColor.name}</div>
                   </div>
                   
