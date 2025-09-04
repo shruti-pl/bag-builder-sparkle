@@ -22,12 +22,12 @@ type StrapType = {
 };
 
 const fabricOptions: FabricType[] = [
-  { id: "black-carbon", name: "Black Carbon", pattern: "carbon-fiber", color: "#1a1a1a" },
-  { id: "red-grid", name: "Gridstop Chili", pattern: "grid", color: "#dc2626" },
-  { id: "green-diamond", name: "Green Diamond", pattern: "diamond", color: "#16a34a" },
-  { id: "brown-leather", name: "Brown Leather", pattern: "leather", color: "#a16207" },
-  { id: "blue-wave", name: "Blue Wave", pattern: "wave", color: "#2563eb" },
-  { id: "black-mesh", name: "Gridstop Black", pattern: "mesh", color: "#374151" },
+  { id: "black-carbon", name: "Black Carbon", pattern: "/lovable-uploads/bab08106-bd68-416e-bd24-55fb7f90d419.png", color: "#1a1a1a" },
+  { id: "red-grid", name: "Gridstop Chili", pattern: "/lovable-uploads/d5c367b1-bbc9-40b0-9cdf-bf2bca499f35.png", color: "#dc2626" },
+  { id: "green-diamond", name: "Green Diamond", pattern: "/lovable-uploads/4d865325-1d07-4456-b94d-2bd295248c79.png", color: "#16a34a" },
+  { id: "brown-leather", name: "Brown Leather", pattern: "/lovable-uploads/bab08106-bd68-416e-bd24-55fb7f90d419.png", color: "#a16207" },
+  { id: "blue-wave", name: "Blue Wave", pattern: "/lovable-uploads/d5c367b1-bbc9-40b0-9cdf-bf2bca499f35.png", color: "#2563eb" },
+  { id: "black-mesh", name: "Gridstop Black", pattern: "/lovable-uploads/4d865325-1d07-4456-b94d-2bd295248c79.png", color: "#374151" },
 ];
 
 const strapOptions: StrapType[] = [
@@ -175,12 +175,10 @@ export const BagCustomizer = () => {
                           `}
                           onClick={() => setSelectedFabric(fabric)}
                         >
-                          <div
-                            className="w-full h-full rounded-lg"
-                            style={{
-                              backgroundColor: fabric.color,
-                              backgroundImage: getPatternBackground(fabric.pattern, fabric.color)
-                            }}
+                          <img
+                            src={fabric.pattern}
+                            alt={fabric.name}
+                            className="w-full h-full object-cover rounded-lg"
                           />
                         </Card>
                         {hoveredFabric === fabric.id && (
@@ -353,27 +351,35 @@ export const BagCustomizer = () => {
                   )}
                 </div>
 
+                {/* Bag Shadow */}
+                <div className="absolute top-14 left-1/2 transform -translate-x-1/2 w-72 h-72 bg-black/20 rounded-3xl blur-md"></div>
+                
                 {/* Main Bag Body */}
-                <div
-                  className="absolute top-12 left-1/2 transform -translate-x-1/2 w-64 h-64 rounded-3xl shadow-2xl transition-all duration-500"
-                  style={{ 
-                    backgroundColor: selectedFabric.color,
-                    backgroundImage: getPatternBackground(selectedFabric.pattern, selectedFabric.color)
-                  }}
-                >
+                <div className="absolute top-12 left-1/2 transform -translate-x-1/2 w-64 h-64 rounded-3xl overflow-hidden shadow-2xl transition-all duration-500">
+                  {/* Bag Fabric Background */}
+                  <img
+                    src={selectedFabric.pattern}
+                    alt={selectedFabric.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  
+                  {/* Fabric Overlay for realistic look */}
+                  <div className="absolute inset-0 bg-black/10 rounded-3xl"></div>
+                  
                   {/* Front Panel */}
                   <div className="absolute inset-4 border border-white/30 rounded-2xl"></div>
                   
                   {/* Zipper */}
-                  <div className="absolute top-6 left-6 w-16 h-1 bg-gray-700 rounded-full"></div>
+                  <div className="absolute top-6 left-6 w-16 h-1 bg-gray-700 rounded-full shadow-sm"></div>
+                  <div className="absolute top-5.5 left-5 w-2 h-2 bg-gray-600 rounded-full"></div>
                   
                   {/* Brand Logo */}
-                  <div className="absolute bottom-6 right-6 w-3 h-3 bg-orange-500 rounded-full"></div>
+                  <div className="absolute bottom-6 right-6 w-3 h-3 bg-orange-500 rounded-full shadow-sm"></div>
                   
                   {/* Carabiner - Only show for padded strap */}
                   {selectedStrap.style === "padded" && (
                     <div 
-                      className="absolute top-2 right-8 w-4 h-6 border-2 border-l-4 rounded-full"
+                      className="absolute top-2 right-8 w-4 h-6 border-2 border-l-4 rounded-full shadow-md"
                       style={{ borderColor: selectedCarabiner.color }}
                     >
                       <div 
