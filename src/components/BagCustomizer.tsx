@@ -22,12 +22,12 @@ type StrapType = {
 };
 
 const fabricOptions: FabricType[] = [
-  { id: "black-carbon", name: "Black Carbon", pattern: "/lovable-uploads/bab08106-bd68-416e-bd24-55fb7f90d419.png", color: "#1a1a1a" },
-  { id: "red-grid", name: "Gridstop Chili", pattern: "/lovable-uploads/d5c367b1-bbc9-40b0-9cdf-bf2bca499f35.png", color: "#dc2626" },
-  { id: "green-diamond", name: "Green Diamond", pattern: "/lovable-uploads/4d865325-1d07-4456-b94d-2bd295248c79.png", color: "#16a34a" },
-  { id: "brown-leather", name: "Brown Leather", pattern: "/lovable-uploads/bab08106-bd68-416e-bd24-55fb7f90d419.png", color: "#a16207" },
-  { id: "blue-wave", name: "Blue Wave", pattern: "/lovable-uploads/d5c367b1-bbc9-40b0-9cdf-bf2bca499f35.png", color: "#2563eb" },
-  { id: "black-mesh", name: "Gridstop Black", pattern: "/lovable-uploads/4d865325-1d07-4456-b94d-2bd295248c79.png", color: "#374151" },
+  { id: "black-carbon", name: "Black Carbon", pattern: "/lovable-uploads/bfa88a29-d10a-4912-8618-a48273313602.png", color: "#1a1a1a" },
+  { id: "red-grid", name: "Gridstop Chili", pattern: "/lovable-uploads/c9140765-a6b3-4ce5-949d-e3166a8932f8.png", color: "#dc2626" },
+  { id: "green-diamond", name: "Green Diamond", pattern: "/lovable-uploads/46ae3287-b79c-4a67-966e-6c805ca42dbe.png", color: "#16a34a" },
+  { id: "brown-grid", name: "Brown Grid", pattern: "/lovable-uploads/fa35bbd9-9273-4056-a426-f3151a8c0f91.png", color: "#a16207" },
+  { id: "blue-grid", name: "Blue Grid", pattern: "/lovable-uploads/80cbdfcb-eda2-41b3-bd66-940e3d151760.png", color: "#2563eb" },
+  { id: "black-grid", name: "Gridstop Black", pattern: "/lovable-uploads/d23910b7-8067-4e30-98f0-c5a41ad235db.png", color: "#374151" },
 ];
 
 const strapOptions: StrapType[] = [
