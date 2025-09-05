@@ -339,8 +339,22 @@ export const BagCustomizer = () => {
                   transformOrigin: 'center'
                 }}
               >
-                {/* Main Bag Body */}
-                <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-48 h-32 rounded-3xl overflow-hidden transition-all duration-500 shadow-xl">
+                {/* Complete Strap - Forms a loop */}
+                <div 
+                  className={`absolute top-8 left-1/2 transform -translate-x-1/2 w-72 h-60 border-4 rounded-full transition-all duration-500 z-10 ${selectedStrap.style === "padded" ? "border-8" : "border-4"}`}
+                  style={{ borderColor: selectedStrapColor.color, backgroundColor: 'transparent' }}
+                >
+                  {/* Padded section at top for shoulder comfort */}
+                  {selectedStrap.style === "padded" && (
+                    <div 
+                      className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-20 h-8 rounded-full border-4 border-white/30"
+                      style={{ backgroundColor: selectedStrapColor.color }}
+                    ></div>
+                  )}
+                </div>
+
+                {/* Compact Bag Body - positioned in center-bottom of strap loop */}
+                <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 w-40 h-24 rounded-2xl overflow-hidden transition-all duration-500 shadow-xl z-20">
                   {/* Bag Fabric Background */}
                   <img
                     src={selectedFabric.solid}
@@ -348,59 +362,36 @@ export const BagCustomizer = () => {
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                   
-                  {/* Realistic bag details */}
-                  <div className="absolute inset-0 bg-black/10 rounded-3xl"></div>
-                  <div className="absolute inset-2 border border-white/30 rounded-2xl"></div>
+                  {/* Bag details overlay */}
+                  <div className="absolute inset-0 bg-black/5 rounded-2xl"></div>
+                  <div className="absolute inset-1 border border-white/20 rounded-xl"></div>
                   
-                  {/* Zipper */}
-                  <div className="absolute top-3 left-3 w-12 h-0.5 bg-gray-700 rounded-full shadow-sm"></div>
-                  <div className="absolute top-2.5 left-2.5 w-1.5 h-1.5 bg-gray-600 rounded-full"></div>
+                  {/* Front zipper */}
+                  <div className="absolute top-2 left-2 w-8 h-0.5 bg-gray-700 rounded-full shadow-sm"></div>
+                  <div className="absolute top-1.5 left-1.5 w-1 h-1 bg-gray-600 rounded-full"></div>
                   
-                  {/* Brand Logo */}
-                  <div className="absolute bottom-3 right-3 w-2 h-2 bg-orange-500 rounded-full shadow-sm"></div>
+                  {/* Brand logo */}
+                  <div className="absolute bottom-2 right-2 w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
                 </div>
 
-                {/* Left Strap Connection */}
-                <div className="absolute top-20 left-16 w-8 h-4 z-20">
+                {/* Strap attachment points on bag */}
+                <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 -translate-x-12 w-4 h-3 z-30">
                   <div 
-                    className={`w-full h-full rounded transition-all duration-500 ${selectedStrap.style === "padded" ? "border border-white/50" : ""}`}
+                    className="w-full h-full rounded"
                     style={{ backgroundColor: selectedStrapColor.color }}
                   ></div>
+                  {/* Small buckle */}
+                  <div className="absolute top-0 left-1 w-2 h-3 bg-gray-800 rounded-sm"></div>
                 </div>
 
-                {/* Right Strap Connection */}
-                <div className="absolute top-20 right-16 w-8 h-4 z-20">
+                <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 translate-x-12 w-4 h-3 z-30">
                   <div 
-                    className={`w-full h-full rounded transition-all duration-500 ${selectedStrap.style === "padded" ? "border border-white/50" : ""}`}
+                    className="w-full h-full rounded"
                     style={{ backgroundColor: selectedStrapColor.color }}
                   ></div>
+                  {/* Small buckle */}
+                  <div className="absolute top-0 left-1 w-2 h-3 bg-gray-800 rounded-sm"></div>
                 </div>
-
-                {/* Main Strap - Left side going up and over */}
-                <div 
-                  className={`absolute top-12 left-20 w-32 rounded-full transition-all duration-500 z-10 transform -rotate-45 origin-left ${selectedStrap.style === "padded" ? "h-4 border border-white/50" : "h-2"}`}
-                  style={{ backgroundColor: selectedStrapColor.color }}
-                ></div>
-
-                {/* Main Strap - Right side going up and over */}
-                <div 
-                  className={`absolute top-12 right-20 w-32 rounded-full transition-all duration-500 z-10 transform rotate-45 origin-right ${selectedStrap.style === "padded" ? "h-4 border border-white/50" : "h-2"}`}
-                  style={{ backgroundColor: selectedStrapColor.color }}
-                ></div>
-
-                {/* Shoulder Pad (for padded strap only) */}
-                {selectedStrap.style === "padded" && (
-                  <div 
-                    className="absolute top-4 left-1/2 transform -translate-x-1/2 w-24 h-6 rounded-full transition-all duration-500 z-5 border-2 border-white/50"
-                    style={{ backgroundColor: selectedStrapColor.color }}
-                  >
-                    <div className="absolute inset-1 border border-white/30 rounded-full"></div>
-                  </div>
-                )}
-
-                {/* Adjustable Buckles */}
-                <div className="absolute top-16 left-12 w-3 h-2 bg-gray-800 rounded-sm z-30"></div>
-                <div className="absolute top-16 right-12 w-3 h-2 bg-gray-800 rounded-sm z-30"></div>
               </div>
             </div>
 
