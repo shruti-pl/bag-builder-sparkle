@@ -339,16 +339,19 @@ export const BagCustomizer = () => {
                   transformOrigin: 'center'
                 }}
               >
-                {/* Strap - positioned within the container */}
+                {/* Bag Shadow */}
+                <div className="absolute top-20 left-1/2 transform -translate-x-1/2 w-72 h-72 bg-black/20 rounded-3xl blur-md"></div>
+                
+                {/* Strap */}
                 <div
                   className={`
-                    absolute top-4 left-1/2 transform -translate-x-1/2 w-56 rounded-full shadow-lg transition-all duration-500 z-10
-                    ${selectedStrap.style === "padded" ? "h-6" : "h-3"}
+                    absolute top-8 left-1/2 transform -translate-x-1/2 w-64 rounded-full shadow-lg transition-all duration-500 z-10
+                    ${selectedStrap.style === "padded" ? "h-6 border-2 border-white/50" : "h-3"}
                   `}
                   style={{ backgroundColor: selectedStrapColor.color }}
                 >
                   {selectedStrap.style === "padded" && (
-                    <div className="absolute inset-1 border border-white/50 rounded-full"></div>
+                    <div className="absolute inset-1 border border-white/30 rounded-full"></div>
                   )}
                 </div>
 
@@ -364,10 +367,8 @@ export const BagCustomizer = () => {
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                   
-                  {/* Fabric Overlay for realistic look */}
+                  {/* Realistic bag details */}
                   <div className="absolute inset-0 bg-black/10 rounded-3xl"></div>
-                  
-                  {/* Front Panel */}
                   <div className="absolute inset-4 border border-white/30 rounded-2xl"></div>
                   
                   {/* Zipper */}
@@ -376,19 +377,6 @@ export const BagCustomizer = () => {
                   
                   {/* Brand Logo */}
                   <div className="absolute bottom-6 right-6 w-3 h-3 bg-orange-500 rounded-full shadow-sm"></div>
-                  
-                  {/* Carabiner - Only show for padded strap */}
-                  {selectedStrap.style === "padded" && (
-                    <div 
-                      className="absolute top-2 right-8 w-4 h-6 border-2 border-l-4 rounded-full shadow-md"
-                      style={{ borderColor: selectedCarabiner.color }}
-                    >
-                      <div 
-                        className="w-1 h-1 mt-0.5 ml-0.5 rounded-sm"
-                        style={{ backgroundColor: selectedCarabiner.color }}
-                      />
-                    </div>
-                  )}
                 </div>
               </div>
             </div> 
