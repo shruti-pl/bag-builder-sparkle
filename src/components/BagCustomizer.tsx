@@ -10,6 +10,7 @@ type FabricType = {
   id: string;
   name: string;
   pattern: string;
+  solid:string;
   color: string;
 };
 
@@ -22,12 +23,12 @@ type StrapType = {
 };
 
 const fabricOptions: FabricType[] = [
-  { id: "black-carbon", name: "Black Carbon", pattern: "/lovable-uploads/bfa88a29-d10a-4912-8618-a48273313602.png", color: "#1a1a1a" },
-  { id: "red-grid", name: "Gridstop Chili", pattern: "/lovable-uploads/c9140765-a6b3-4ce5-949d-e3166a8932f8.png", color: "#dc2626" },
-  { id: "green-diamond", name: "Green Diamond", pattern: "/lovable-uploads/46ae3287-b79c-4a67-966e-6c805ca42dbe.png", color: "#16a34a" },
-  { id: "brown-grid", name: "Brown Grid", pattern: "/lovable-uploads/fa35bbd9-9273-4056-a426-f3151a8c0f91.png", color: "#a16207" },
-  { id: "blue-grid", name: "Blue Grid", pattern: "/lovable-uploads/80cbdfcb-eda2-41b3-bd66-940e3d151760.png", color: "#2563eb" },
-  { id: "black-grid", name: "Gridstop Black", pattern: "/lovable-uploads/d23910b7-8067-4e30-98f0-c5a41ad235db.png", color: "#374151" },
+  { id: "black-carbon", name: "Black Carbon", pattern: "/lovable-uploads/bfa88a29-d10a-4912-8618-a48273313602.png", solid:"/lovable-uploads/blackbody.png",color: "#1a1a1a" },
+  { id: "red-grid", name: "Gridstop Chili", pattern: "/lovable-uploads/c9140765-a6b3-4ce5-949d-e3166a8932f8.png", solid:"/lovable-uploads/redbody.png", color: "#dc2626" },
+  { id: "green-diamond", name: "Green Diamond", pattern: "/lovable-uploads/46ae3287-b79c-4a67-966e-6c805ca42dbe.png", solid:"/lovable-uploads/greenbody.png", color: "#16a34a" },
+  { id: "brown-grid", name: "Brown Grid", pattern: "/lovable-uploads/fa35bbd9-9273-4056-a426-f3151a8c0f91.png", solid:"/lovable-uploads/brownbody.png", color: "#a16207" },
+  { id: "blue-grid", name: "Blue Grid", pattern: "/lovable-uploads/80cbdfcb-eda2-41b3-bd66-940e3d151760.png",  solid:"/lovable-uploads/bluebody.png",color: "#2563eb" },
+  { id: "black-grid", name: "Gridstop Black", pattern: "/lovable-uploads/d23910b7-8067-4e30-98f0-c5a41ad235db.png", solid:"/lovable-uploads/blkCheckbody.png", color: "#374151" },
 ];
 
 const strapOptions: StrapType[] = [
@@ -352,13 +353,13 @@ export const BagCustomizer = () => {
                 </div>
 
                 {/* Bag Shadow */}
-                <div className="absolute top-14 left-1/2 transform -translate-x-1/2 w-72 h-72 bg-black/20 rounded-3xl blur-md"></div>
+                {/* <div className="absolute top-14 left-1/2 transform -translate-x-1/2 w-72 h-72 bg-black/20 rounded-3xl blur-md"></div> */}
                 
                 {/* Main Bag Body */}
-                <div className="absolute top-12 left-1/2 transform -translate-x-1/2 w-64 h-64 rounded-3xl overflow-hidden shadow-2xl transition-all duration-500">
+                <div className="absolute top-12 left-1/2 transform -translate-x-1/2 w-64 h-64  overflow-hidden transition-all duration-500">
                   {/* Bag Fabric Background */}
                   <img
-                    src={selectedFabric.pattern}
+                    src={selectedFabric.solid}
                     alt={selectedFabric.name}
                     className="absolute inset-0 w-full h-full object-cover"
                   />
@@ -390,7 +391,7 @@ export const BagCustomizer = () => {
                   )}
                 </div>
               </div>
-            </div>
+            </div> 
 
             {/* Add to Cart Button */}
             <div className="px-8 pb-8 flex justify-center">
