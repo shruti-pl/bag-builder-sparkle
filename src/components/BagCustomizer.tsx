@@ -339,27 +339,8 @@ export const BagCustomizer = () => {
                   transformOrigin: 'center'
                 }}
               >
-                {/* Bag Shadow */}
-                <div className="absolute top-20 left-1/2 transform -translate-x-1/2 w-72 h-72 bg-black/20 rounded-3xl blur-md"></div>
-                
-                {/* Strap */}
-                <div
-                  className={`
-                    absolute top-8 left-1/2 transform -translate-x-1/2 w-64 rounded-full shadow-lg transition-all duration-500 z-10
-                    ${selectedStrap.style === "padded" ? "h-6 border-2 border-white/50" : "h-3"}
-                  `}
-                  style={{ backgroundColor: selectedStrapColor.color }}
-                >
-                  {selectedStrap.style === "padded" && (
-                    <div className="absolute inset-1 border border-white/30 rounded-full"></div>
-                  )}
-                </div>
-
-                {/* Bag Shadow */}
-                {/* <div className="absolute top-14 left-1/2 transform -translate-x-1/2 w-72 h-72 bg-black/20 rounded-3xl blur-md"></div> */}
-                
                 {/* Main Bag Body */}
-                <div className="absolute top-12 left-1/2 transform -translate-x-1/2 w-64 h-64  overflow-hidden transition-all duration-500">
+                <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-48 h-32 rounded-3xl overflow-hidden transition-all duration-500 shadow-xl">
                   {/* Bag Fabric Background */}
                   <img
                     src={selectedFabric.solid}
@@ -369,17 +350,59 @@ export const BagCustomizer = () => {
                   
                   {/* Realistic bag details */}
                   <div className="absolute inset-0 bg-black/10 rounded-3xl"></div>
-                  <div className="absolute inset-4 border border-white/30 rounded-2xl"></div>
+                  <div className="absolute inset-2 border border-white/30 rounded-2xl"></div>
                   
                   {/* Zipper */}
-                  <div className="absolute top-6 left-6 w-16 h-1 bg-gray-700 rounded-full shadow-sm"></div>
-                  <div className="absolute top-5.5 left-5 w-2 h-2 bg-gray-600 rounded-full"></div>
+                  <div className="absolute top-3 left-3 w-12 h-0.5 bg-gray-700 rounded-full shadow-sm"></div>
+                  <div className="absolute top-2.5 left-2.5 w-1.5 h-1.5 bg-gray-600 rounded-full"></div>
                   
                   {/* Brand Logo */}
-                  <div className="absolute bottom-6 right-6 w-3 h-3 bg-orange-500 rounded-full shadow-sm"></div>
+                  <div className="absolute bottom-3 right-3 w-2 h-2 bg-orange-500 rounded-full shadow-sm"></div>
                 </div>
+
+                {/* Left Strap Connection */}
+                <div className="absolute top-20 left-16 w-8 h-4 z-20">
+                  <div 
+                    className={`w-full h-full rounded transition-all duration-500 ${selectedStrap.style === "padded" ? "border border-white/50" : ""}`}
+                    style={{ backgroundColor: selectedStrapColor.color }}
+                  ></div>
+                </div>
+
+                {/* Right Strap Connection */}
+                <div className="absolute top-20 right-16 w-8 h-4 z-20">
+                  <div 
+                    className={`w-full h-full rounded transition-all duration-500 ${selectedStrap.style === "padded" ? "border border-white/50" : ""}`}
+                    style={{ backgroundColor: selectedStrapColor.color }}
+                  ></div>
+                </div>
+
+                {/* Main Strap - Left side going up and over */}
+                <div 
+                  className={`absolute top-12 left-20 w-32 rounded-full transition-all duration-500 z-10 transform -rotate-45 origin-left ${selectedStrap.style === "padded" ? "h-4 border border-white/50" : "h-2"}`}
+                  style={{ backgroundColor: selectedStrapColor.color }}
+                ></div>
+
+                {/* Main Strap - Right side going up and over */}
+                <div 
+                  className={`absolute top-12 right-20 w-32 rounded-full transition-all duration-500 z-10 transform rotate-45 origin-right ${selectedStrap.style === "padded" ? "h-4 border border-white/50" : "h-2"}`}
+                  style={{ backgroundColor: selectedStrapColor.color }}
+                ></div>
+
+                {/* Shoulder Pad (for padded strap only) */}
+                {selectedStrap.style === "padded" && (
+                  <div 
+                    className="absolute top-4 left-1/2 transform -translate-x-1/2 w-24 h-6 rounded-full transition-all duration-500 z-5 border-2 border-white/50"
+                    style={{ backgroundColor: selectedStrapColor.color }}
+                  >
+                    <div className="absolute inset-1 border border-white/30 rounded-full"></div>
+                  </div>
+                )}
+
+                {/* Adjustable Buckles */}
+                <div className="absolute top-16 left-12 w-3 h-2 bg-gray-800 rounded-sm z-30"></div>
+                <div className="absolute top-16 right-12 w-3 h-2 bg-gray-800 rounded-sm z-30"></div>
               </div>
-            </div> 
+            </div>
 
             {/* Add to Cart Button */}
             <div className="px-8 pb-8 flex justify-center">
