@@ -339,22 +339,27 @@ export const BagCustomizer = () => {
                   transformOrigin: 'center'
                 }}
               >
-                {/* Complete Strap - Forms a loop */}
-                <div 
-                  className={`absolute top-8 left-1/2 transform -translate-x-1/2 w-72 h-60 border-4 rounded-full transition-all duration-500 z-10 ${selectedStrap.style === "padded" ? "border-8" : "border-4"}`}
-                  style={{ borderColor: selectedStrapColor.color, backgroundColor: 'transparent' }}
+                {/* Bag Shadow */}
+                <div className="absolute top-20 left-1/2 transform -translate-x-1/2 w-72 h-72 bg-black/20 rounded-3xl blur-md"></div>
+                
+                {/* Strap */}
+                <div
+                  className={`
+                    absolute top-8 left-1/2 transform -translate-x-1/2 w-64 rounded-full shadow-lg transition-all duration-500 z-10
+                    ${selectedStrap.style === "padded" ? "h-6 border-2 border-white/50" : "h-3"}
+                  `}
+                  style={{ backgroundColor: selectedStrapColor.color }}
                 >
-                  {/* Padded section at top for shoulder comfort */}
                   {selectedStrap.style === "padded" && (
-                    <div 
-                      className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-20 h-8 rounded-full border-4 border-white/30"
-                      style={{ backgroundColor: selectedStrapColor.color }}
-                    ></div>
+                    <div className="absolute inset-1 border border-white/30 rounded-full"></div>
                   )}
                 </div>
 
-                {/* Compact Bag Body - positioned in center-bottom of strap loop */}
-                <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 w-40 h-24 rounded-2xl overflow-hidden transition-all duration-500 shadow-xl z-20">
+                {/* Bag Shadow */}
+                {/* <div className="absolute top-14 left-1/2 transform -translate-x-1/2 w-72 h-72 bg-black/20 rounded-3xl blur-md"></div> */}
+                
+                {/* Main Bag Body */}
+                <div className="absolute top-12 left-1/2 transform -translate-x-1/2 w-64 h-64  overflow-hidden transition-all duration-500">
                   {/* Bag Fabric Background */}
                   <img
                     src={selectedFabric.solid}
@@ -362,38 +367,19 @@ export const BagCustomizer = () => {
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                   
-                  {/* Bag details overlay */}
-                  <div className="absolute inset-0 bg-black/5 rounded-2xl"></div>
-                  <div className="absolute inset-1 border border-white/20 rounded-xl"></div>
+                  {/* Realistic bag details */}
+                  <div className="absolute inset-0 bg-black/10 rounded-3xl"></div>
+                  <div className="absolute inset-4 border border-white/30 rounded-2xl"></div>
                   
-                  {/* Front zipper */}
-                  <div className="absolute top-2 left-2 w-8 h-0.5 bg-gray-700 rounded-full shadow-sm"></div>
-                  <div className="absolute top-1.5 left-1.5 w-1 h-1 bg-gray-600 rounded-full"></div>
+                  {/* Zipper */}
+                  <div className="absolute top-6 left-6 w-16 h-1 bg-gray-700 rounded-full shadow-sm"></div>
+                  <div className="absolute top-5.5 left-5 w-2 h-2 bg-gray-600 rounded-full"></div>
                   
-                  {/* Brand logo */}
-                  <div className="absolute bottom-2 right-2 w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
-                </div>
-
-                {/* Strap attachment points on bag */}
-                <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 -translate-x-12 w-4 h-3 z-30">
-                  <div 
-                    className="w-full h-full rounded"
-                    style={{ backgroundColor: selectedStrapColor.color }}
-                  ></div>
-                  {/* Small buckle */}
-                  <div className="absolute top-0 left-1 w-2 h-3 bg-gray-800 rounded-sm"></div>
-                </div>
-
-                <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 translate-x-12 w-4 h-3 z-30">
-                  <div 
-                    className="w-full h-full rounded"
-                    style={{ backgroundColor: selectedStrapColor.color }}
-                  ></div>
-                  {/* Small buckle */}
-                  <div className="absolute top-0 left-1 w-2 h-3 bg-gray-800 rounded-sm"></div>
+                  {/* Brand Logo */}
+                  <div className="absolute bottom-6 right-6 w-3 h-3 bg-orange-500 rounded-full shadow-sm"></div>
                 </div>
               </div>
-            </div>
+            </div> 
 
             {/* Add to Cart Button */}
             <div className="px-8 pb-8 flex justify-center">
