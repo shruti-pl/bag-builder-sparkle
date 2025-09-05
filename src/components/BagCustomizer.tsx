@@ -10,6 +10,7 @@ type FabricType = {
   id: string;
   name: string;
   pattern: string;
+  bagBody: string;
   color: string;
 };
 
@@ -22,12 +23,12 @@ type StrapType = {
 };
 
 const fabricOptions: FabricType[] = [
-  { id: "black-carbon", name: "Black Carbon", pattern: "/lovable-uploads/bfa88a29-d10a-4912-8618-a48273313602.png", color: "#1a1a1a" },
-  { id: "red-grid", name: "Gridstop Chili", pattern: "/lovable-uploads/c9140765-a6b3-4ce5-949d-e3166a8932f8.png", color: "#dc2626" },
-  { id: "green-diamond", name: "Green Diamond", pattern: "/lovable-uploads/46ae3287-b79c-4a67-966e-6c805ca42dbe.png", color: "#16a34a" },
-  { id: "brown-grid", name: "Brown Grid", pattern: "/lovable-uploads/fa35bbd9-9273-4056-a426-f3151a8c0f91.png", color: "#a16207" },
-  { id: "blue-grid", name: "Blue Grid", pattern: "/lovable-uploads/80cbdfcb-eda2-41b3-bd66-940e3d151760.png", color: "#2563eb" },
-  { id: "black-grid", name: "Gridstop Black", pattern: "/lovable-uploads/d23910b7-8067-4e30-98f0-c5a41ad235db.png", color: "#374151" },
+  { id: "black-carbon", name: "Black Carbon", pattern: "/lovable-uploads/bfa88a29-d10a-4912-8618-a48273313602.png", bagBody: "/lovable-uploads/f5d4d3a3-1efd-4758-a582-3ba0fa2302a1.png", color: "#1a1a1a" },
+  { id: "red-grid", name: "Gridstop Chili", pattern: "/lovable-uploads/c9140765-a6b3-4ce5-949d-e3166a8932f8.png", bagBody: "/lovable-uploads/e5ee29c3-15d8-4ff1-8bbe-c3dc2a97eca2.png", color: "#dc2626" },
+  { id: "green-diamond", name: "Green Diamond", pattern: "/lovable-uploads/46ae3287-b79c-4a67-966e-6c805ca42dbe.png", bagBody: "/lovable-uploads/f5d4d3a3-1efd-4758-a582-3ba0fa2302a1.png", color: "#16a34a" },
+  { id: "brown-grid", name: "Brown Grid", pattern: "/lovable-uploads/fa35bbd9-9273-4056-a426-f3151a8c0f91.png", bagBody: "/lovable-uploads/f5d4d3a3-1efd-4758-a582-3ba0fa2302a1.png", color: "#a16207" },
+  { id: "blue-grid", name: "Blue Grid", pattern: "/lovable-uploads/80cbdfcb-eda2-41b3-bd66-940e3d151760.png", bagBody: "/lovable-uploads/f5d4d3a3-1efd-4758-a582-3ba0fa2302a1.png", color: "#2563eb" },
+  { id: "black-grid", name: "Gridstop Black", pattern: "/lovable-uploads/d23910b7-8067-4e30-98f0-c5a41ad235db.png", bagBody: "/lovable-uploads/f5d4d3a3-1efd-4758-a582-3ba0fa2302a1.png", color: "#374151" },
 ];
 
 const strapOptions: StrapType[] = [
@@ -338,57 +339,22 @@ export const BagCustomizer = () => {
                   transformOrigin: 'center'
                 }}
               >
-                {/* Strap - positioned within the container */}
-                <div
-                  className={`
-                    absolute top-4 left-1/2 transform -translate-x-1/2 w-56 rounded-full shadow-lg transition-all duration-500 z-10
-                    ${selectedStrap.style === "padded" ? "h-6" : "h-3"}
-                  `}
-                  style={{ backgroundColor: selectedStrapColor.color }}
-                >
-                  {selectedStrap.style === "padded" && (
-                    <div className="absolute inset-1 border border-white/50 rounded-full"></div>
-                  )}
-                </div>
+                {/* Bag Strap */}
+                <img
+                  src="/lovable-uploads/50b8f748-7090-4e9e-a219-a4cd4c6a8c76.png"
+                  alt="Bag Strap"
+                  className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-32 object-contain z-10 transition-all duration-500"
+                  style={{
+                    filter: selectedStrapColor.id !== 'black' ? `sepia(1) saturate(2) hue-rotate(${selectedStrapColor.id === 'gray' ? '0deg' : '200deg'})` : 'none'
+                  }}
+                />
 
-                {/* Bag Shadow */}
-                <div className="absolute top-14 left-1/2 transform -translate-x-1/2 w-72 h-72 bg-black/20 rounded-3xl blur-md"></div>
-                
                 {/* Main Bag Body */}
-                <div className="absolute top-12 left-1/2 transform -translate-x-1/2 w-64 h-64 rounded-3xl overflow-hidden shadow-2xl transition-all duration-500">
-                  {/* Bag Fabric Background */}
-                  <img
-                    src={selectedFabric.pattern}
-                    alt={selectedFabric.name}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  
-                  {/* Fabric Overlay for realistic look */}
-                  <div className="absolute inset-0 bg-black/10 rounded-3xl"></div>
-                  
-                  {/* Front Panel */}
-                  <div className="absolute inset-4 border border-white/30 rounded-2xl"></div>
-                  
-                  {/* Zipper */}
-                  <div className="absolute top-6 left-6 w-16 h-1 bg-gray-700 rounded-full shadow-sm"></div>
-                  <div className="absolute top-5.5 left-5 w-2 h-2 bg-gray-600 rounded-full"></div>
-                  
-                  {/* Brand Logo */}
-                  <div className="absolute bottom-6 right-6 w-3 h-3 bg-orange-500 rounded-full shadow-sm"></div>
-                  
-                  {/* Carabiner - Only show for padded strap */}
-                  {selectedStrap.style === "padded" && (
-                    <div 
-                      className="absolute top-2 right-8 w-4 h-6 border-2 border-l-4 rounded-full shadow-md"
-                      style={{ borderColor: selectedCarabiner.color }}
-                    >
-                      <div 
-                        className="w-1 h-1 mt-0.5 ml-0.5 rounded-sm"
-                        style={{ backgroundColor: selectedCarabiner.color }}
-                      />
-                    </div>
-                  )}
-                </div>
+                <img
+                  src={selectedFabric.bagBody}
+                  alt={`${selectedFabric.name} Bag`}
+                  className="absolute top-8 left-1/2 transform -translate-x-1/2 w-80 h-80 object-contain transition-all duration-500 z-20"
+                />
               </div>
             </div>
 
